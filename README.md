@@ -1,2 +1,5 @@
 # summerhacks_team
-Summerhacks. Git practice for teammates.
+
+Scheduling application for kids, built with React Native
+<em> Work in progress...come back later! </em>
+
