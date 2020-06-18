@@ -8,10 +8,44 @@ import {
   Dimensions,
   Platform,
   StatusBar,
+  TextInput,
+  Alert,
 } from "react-native";
 
+//function myColorAlert extends Component
 
 export default class SettingsScreen extends Component {
+
+//TO DO: When pressed, this should CHANGE INTERNAL SETTINGS
+//       so that certain features across the app are their favorite color
+myColorAlert = () =>
+  Alert.alert(
+    "Change Favorite Color",
+    "Select One",
+    [
+        {
+            text: "Purple",
+            //TODO: change internal color var in onPress
+            onPress: () => console.log("Purple pressed")
+        },
+        { //TODO: change internal color var in onPress
+            text: "Blue",
+            onPress: () => console.log("Blue pressed"),
+        },
+        { 
+            text: "Green", 
+            //TODO: change internal color var in onPress
+            onPress: () => console.log("Green pressed") 
+        },
+        {
+        text: "Cancel",
+        onPress: () => console.log("Cancel pressed"),
+        style: "cancel"
+        },
+    ],
+    { cancelable: true }
+  );
+
   state = {
     buttonOne: "Change User Name",
     buttonTwo: "Change Favorite Color",
@@ -19,26 +53,23 @@ export default class SettingsScreen extends Component {
     buttonFour: "Help"
   };
 
-  onPress = () => {
-    this.setState({
-      buttonOne:
-        "Pressed"
-    });
-  };
-
   render() {
     return (
 
         //Buttons turn translucent when touched
         //TODO link button to changing screen or pop-up window
+
+        // onPress={createThreeButtonAlert}
       <SafeAreaView style={styles.container}>
         <Text style={styles.heading}> Settings</Text>
         <TouchableOpacity>
             <Text style={styles.button_disp}>{this.state.buttonOne}</Text>
         </TouchableOpacity>
+
         <TouchableOpacity>
-            <Text style={styles.button_disp}>{this.state.buttonTwo}</Text>
+            <Text style={styles.button_disp} onPress={this.myColorAlert}>{this.state.buttonTwo}</Text>
         </TouchableOpacity>
+
         <TouchableOpacity>
             <Text style={styles.button_disp}>{this.state.buttonThree}</Text>
         </TouchableOpacity>
@@ -86,3 +117,11 @@ const styles = StyleSheet.create({
     //fontFamily: "Calibri",
   },
 });
+
+
+//TODO: add this to button one:
+//<TextInput
+//style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+//onChangeText={text => onChangeText(text)}
+//value={value}
+///>
