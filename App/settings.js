@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -10,6 +10,7 @@ import {
   StatusBar,
   TextInput,
   Alert,
+  Switch,
 } from "react-native";
 
 //function myColorAlert extends Component
@@ -23,18 +24,16 @@ myColorAlert = () =>
     "Change Favorite Color",
     "Select One",
     [
-        {
+        {   //TODO: change internal color var in onPress
             text: "Purple",
-            //TODO: change internal color var in onPress
             onPress: () => console.log("Purple pressed")
         },
-        { //TODO: change internal color var in onPress
+        {   //TODO: change internal color var in onPress
             text: "Blue",
             onPress: () => console.log("Blue pressed"),
         },
-        { 
+        {   //TODO: change internal color var in onPress
             text: "Green", 
-            //TODO: change internal color var in onPress
             onPress: () => console.log("Green pressed") 
         },
         {
@@ -45,6 +44,7 @@ myColorAlert = () =>
     ],
     { cancelable: true }
   );
+
 
   state = {
     buttonOne: "Change User Name",
@@ -76,7 +76,19 @@ myColorAlert = () =>
         <TouchableOpacity>
             <Text style={styles.button_disp}>{this.state.buttonFour}</Text>
         </TouchableOpacity>
+
+
+        <Switch style={styles.switch_disp}
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={this.isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={this.toggleSwitch}
+        value={this.isEnabled}
+      />
+
       </SafeAreaView>
+    //TODO: Switch currently does nothing. 
+    // make toggleSwitch function
     );
   }
 }
@@ -107,7 +119,10 @@ const styles = StyleSheet.create({
     //Top margin NOT needed due to even spacing with justifyContent
     //marginTop: Dimensions.get("screen").height / 12,
   },
+  switch_disp:{
+    marginLeft: Dimensions.get("screen").width / 3,
 
+  },
   // "Settings" headings
   heading: {
     fontWeight:"bold",
@@ -119,9 +134,3 @@ const styles = StyleSheet.create({
 });
 
 
-//TODO: add this to button one:
-//<TextInput
-//style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-//onChangeText={text => onChangeText(text)}
-//value={value}
-///>
