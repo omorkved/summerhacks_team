@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   Text,
   StyleSheet,
-  //TouchableHighlight,
   TouchableOpacity,
   Dimensions,
   Platform,
@@ -13,8 +12,7 @@ import {
   Switch,
 } from "react-native";
 
-//function myColorAlert extends Component
-
+//TODO Remove "default" upon pull to master
 export default class SettingsScreen extends Component {
 
 //TO DO: When pressed, this should CHANGE INTERNAL SETTINGS
@@ -60,25 +58,25 @@ myColorAlert = () =>
         //TODO link button to changing screen or pop-up window
 
         // onPress={createThreeButtonAlert}
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.heading}> Settings</Text>
+      <SafeAreaView style={settingsStyles.container}>
+        <Text style={settingsStyles.heading}> Settings</Text>
         <TouchableOpacity>
-            <Text style={styles.button_disp}>{this.state.buttonOne}</Text>
+            <Text style={settingsStyles.button_disp}>{this.state.buttonOne}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity>
-            <Text style={styles.button_disp} onPress={this.myColorAlert}>{this.state.buttonTwo}</Text>
+            <Text style={settingsStyles.button_disp} onPress={this.myColorAlert}>{this.state.buttonTwo}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity>
-            <Text style={styles.button_disp}>{this.state.buttonThree}</Text>
+            <Text style={settingsStyles.button_disp}>{this.state.buttonThree}</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-            <Text style={styles.button_disp}>{this.state.buttonFour}</Text>
+            <Text style={settingsStyles.button_disp}>{this.state.buttonFour}</Text>
         </TouchableOpacity>
 
 
-        <Switch style={styles.switch_disp}
+        <Switch style={settingsStyles.switch_disp}
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         thumbColor={this.isEnabled ? "#f5dd4b" : "#f4f3f4"}
         ios_backgroundColor="#3e3e3e"
@@ -93,7 +91,7 @@ myColorAlert = () =>
   }
 }
 
-const styles = StyleSheet.create({
+const settingsStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
