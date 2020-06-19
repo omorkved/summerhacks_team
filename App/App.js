@@ -8,6 +8,8 @@ import {
   Settings,
   SafeAreaView,
   Image,
+  Platform,
+  Dimensions,
   TouchableOpacity,
 } from "react-native";
 
@@ -18,7 +20,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Internal
 import { CategoriesScreen, categoryStyles}  from "./categories"
 import {HealthScreen, FunScreen, MusicalScreen, OutdoorsScreen, LearningScreen, RandomScreen} from "./categoryScreens";
-
+import SettingsScreen from "./settings"
 
 function HomeScreen({ navigation }) {
   return (
@@ -38,9 +40,9 @@ function HomeScreen({ navigation }) {
         width="50%"
         onPress={() => navigation.navigate("Details")}
       />
-      <TouchableOpacity onPress={() => navigation.navigate("Details")}>
+      {/*<TouchableOpacity onPress={() => navigation.navigate("Details")}>
         <Text style={homeStyles.catbutton}>Testingg Ignore</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>*/}
       <Button
         title="Settings"
         onPress={() => navigation.navigate("Settings")}
@@ -65,7 +67,7 @@ function DetailsScreen() {
   );
 }
 
-// TODO: Olivia will replace with actual settings screen
+/*
 function SettingsScreen() {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -73,7 +75,7 @@ function SettingsScreen() {
       <Text> Olivia this is reserved space for your code;)</Text>
     </View>
   );
-}
+}*/
 
 
 /* NAVIGATION */
@@ -128,6 +130,15 @@ function App() {
 
 // Also importing style sheets above
 const homeStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    alignContent: "center",
+    marginBottom: Dimensions.get("screen").height / 5,
+
+    // Adds even vertical spacing between the buttons//icons:
+    justifyContent: "space-evenly"
+  },
   catbutton: {
     position: "relative",
     width: 180,
