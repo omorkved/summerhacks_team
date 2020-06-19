@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
-export default function HealthScreen({ navigation }) {
+export function HealthScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>health Screen</Text>
@@ -14,7 +14,7 @@ export default function HealthScreen({ navigation }) {
   );
 }
 
-function FunScreen({ navigation }) {
+export function FunScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>fun Screen</Text>
@@ -25,7 +25,7 @@ function FunScreen({ navigation }) {
     </View>
   );
 }
-function MusicalScreen({ navigation }) {
+export function MusicalScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>music Screen</Text>
@@ -36,7 +36,7 @@ function MusicalScreen({ navigation }) {
     </View>
   );
 }
-function OutdoorsScreen({ navigation }) {
+export function OutdoorsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>outdoors Screen</Text>
@@ -47,7 +47,7 @@ function OutdoorsScreen({ navigation }) {
     </View>
   );
 }
-function LearningScreen({ navigation }) {
+export function LearningScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>learning Screen</Text>
@@ -58,7 +58,7 @@ function LearningScreen({ navigation }) {
     </View>
   );
 }
-function RandomScreen({ navigation }) {
+export function RandomScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>random Screen</Text>

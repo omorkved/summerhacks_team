@@ -4,41 +4,41 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import categoryScreens from "./categoryScreens";
+import {HealthScreen, FunScreen, MusicalScreen, OutdoorsScreen, LearningScreen, RandomScreen} from "./categoryScreens";
 
-function CategoriesScreen({ navigation }) {
+export function CategoriesScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    <View style={categoryStyles.container}>
       <TouchableOpacity onPress={() => navigation.navigate("health")}>
-        <Text style={styles.healthButton}>HEALTH</Text>
+        <Text style={categoryStyles.healthButton}>HEALTH</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("fun")}>
-        <Text style={styles.funButton}>FUN</Text>
+        <Text style={categoryStyles.funButton}>FUN</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("music")}>
-        <Text style={styles.musicalButton}>MUSIC</Text>
+        <Text style={categoryStyles.musicalButton}>MUSIC</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("outdoors")}>
-        <Text style={styles.outdoorsButton}>OUTDOORS</Text>
+        <Text style={categoryStyles.outdoorsButton}>OUTDOORS</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("learning")}>
-        <Text style={styles.learningButton}>LEARNING</Text>
+        <Text style={categoryStyles.learningButton}>LEARNING</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("random")}>
-        <Text style={styles.randomButton}>RANDOM</Text>
+        <Text style={categoryStyles.randomButton}>RANDOM</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-const Stack = createStackNavigator();
+//const Stack = createStackNavigator();
 
-function categories() {
+/*function categories() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -52,9 +52,13 @@ function categories() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+}*/
 
-const styles = StyleSheet.create({
+
+// TODO: Change these heights so that they relate to screen dimensions, not absolute numbers
+/* NOTE: Notice how I changed the name of this style sheet. This is to avoid name collision when
+        I import it into App.ks */
+const categoryStyles = StyleSheet.create({
   healthButton: {
     position: "absolute",
     width: 180,
@@ -134,4 +138,4 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
 });
-export default App;
+//export default App;
