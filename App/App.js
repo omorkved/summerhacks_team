@@ -1,6 +1,6 @@
 import React from "react";
-import ActivityScreen from "./activity_screen.js";
+import RandomScreen from "./RandomScreen.js";
 
 export default function App() {
-  return <ActivityScreen />;
+  return <RandomScreen />;
 }

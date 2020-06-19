@@ -17,7 +17,7 @@ var activities_array = [
   "Watch YouTube!",
 ];
 
-export default class ActivityScreen extends Component {
+export default class RandomScreen extends Component {
   state = {
     activity: "Generate a random activity by clicking the image!",
   };
