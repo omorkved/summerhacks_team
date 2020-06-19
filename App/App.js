@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import HealthScreen from "./healthScreen.js";
+
 function CategoriesScreen({ navigation }) {
   return (
     <View style={styles.container}>
@@ -34,17 +36,6 @@ function CategoriesScreen({ navigation }) {
   );
 }
 
-function HealthScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>health Screen</Text>
-      <Button
-        title="Put activities here"
-        onPress={() => navigation.navigate("health")}
-      />
-    </View>
-  );
-}
 
 function FunScreen({ navigation }) {
   return (
