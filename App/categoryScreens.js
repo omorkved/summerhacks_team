@@ -2,6 +2,8 @@ import "react-native-gesture-handler";
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
+import { RandomActivityScreen } from "./RandomActivityScreen";
+
 export function HealthScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -60,12 +62,13 @@ export function LearningScreen({ navigation }) {
 }
 export function RandomScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>random Screen</Text>
-      <Button
-        title="Put activities here"
-        onPress={() => navigation.navigate("random")}
-      />
-    </View>
+    <RandomActivityScreen />
+    // <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    //   <Text>random Screen</Text>
+    //   <Button
+    //     title="Put activities here"
+    //     onPress={() => navigation.navigate("QWERTY")}
+    //   />
+    // </View>
   );
 }

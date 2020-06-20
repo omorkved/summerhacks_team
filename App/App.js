@@ -120,12 +120,11 @@ function App() {
         <Stack.Screen name="music" component={MusicalScreen} />
         <Stack.Screen name="outdoors" component={OutdoorsScreen} />
         <Stack.Screen name="learning" component={LearningScreen} />
-        <Stack.Screen name="random" component={RandomActivityScreen} />
+        <Stack.Screen name="random" component={RandomScreen} />
         {/* End of Section B */}
 
         {/* Section C:
         NOTE: Add all other stack screens that are only reach from OTHER pages HERE */}
-        <Stack.Screen name="QWERTY" component={RandomActivityScreen} />
         {/* End of Section C */}
       </Stack.Navigator>
     </NavigationContainer>

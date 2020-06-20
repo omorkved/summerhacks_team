@@ -4,7 +4,14 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import {HealthScreen, FunScreen, MusicalScreen, OutdoorsScreen, LearningScreen, RandomScreen} from "./categoryScreens";
+import {
+  HealthScreen,
+  FunScreen,
+  MusicalScreen,
+  OutdoorsScreen,
+  LearningScreen,
+  RandomScreen,
+} from "./categoryScreens";
 
 export function CategoriesScreen({ navigation }) {
   return (
@@ -53,7 +60,6 @@ export function CategoriesScreen({ navigation }) {
     </NavigationContainer>
   );
 }*/
-
 
 // TODO: Change these heights so that they relate to screen dimensions, not absolute numbers
 /* NOTE: Notice how I changed the name of this style sheet. This is to avoid name collision when

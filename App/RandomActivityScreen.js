@@ -10,14 +10,14 @@ import {
   Image,
 } from "react-native";
 
-var activities_array = [
+export var activities_array = [
   "Go on a walk!",
   "Learn a new skill!",
   "Practice writing!",
   "Watch YouTube!",
 ];
 
-export default class RandomScreen extends Component {
+export class RandomActivityScreen extends Component {
   state = {
     activity: "Generate a random activity by clicking the image!",
   };
