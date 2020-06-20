@@ -11,6 +11,7 @@ import {
   Platform,
   Dimensions,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
 
 // From React Navigation
@@ -18,9 +19,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Internal
-import { CategoriesScreen, categoryStyles}  from "./categories"
-import {HealthScreen, FunScreen, MusicalScreen, OutdoorsScreen, LearningScreen, RandomScreen} from "./categoryScreens";
-import SettingsScreen from "./settings"
+import { CategoriesScreen, categoryStyles } from "./categories";
+import {
+  HealthScreen,
+  FunScreen,
+  MusicalScreen,
+  OutdoorsScreen,
+  LearningScreen,
+  RandomScreen,
+} from "./categoryScreens";
+import SettingsScreen from "./settings";
+import { RandomActivityScreen } from "./RandomActivityScreen";
 
 function HomeScreen({ navigation }) {
   return (
@@ -51,7 +60,6 @@ function HomeScreen({ navigation }) {
   );
 }
 
-
 // DetailsScreen: not used -- can delete?
 function DetailsScreen() {
   return (
@@ -77,14 +85,12 @@ function SettingsScreen() {
   );
 }*/
 
-
 /* NAVIGATION */
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-
       {/* Section A: Home Screen page's stack screens
         ONLY add stack screens reachable directly from home page in Section A. */}
 
@@ -94,7 +100,7 @@ function App() {
           component={HomeScreen}
           options={{ title: "Homepage" }}
         />
-        { /* TO DO-- Change name from "Details" to "Categories" ?*/}
+        {/* TO DO-- Change name from "Details" to "Categories" ?*/}
         <Stack.Screen
           name="Details"
           component={CategoriesScreen}
@@ -106,7 +112,7 @@ function App() {
           options={{ Settings }}
         />
         {/* End of Section A */}
-        
+
         {/* Section B: Category Pages's Stack Screens */}
         <Stack.Screen name="categories" component={CategoriesScreen} />
         <Stack.Screen name="health" component={HealthScreen} />
@@ -114,15 +120,13 @@ function App() {
         <Stack.Screen name="music" component={MusicalScreen} />
         <Stack.Screen name="outdoors" component={OutdoorsScreen} />
         <Stack.Screen name="learning" component={LearningScreen} />
-        <Stack.Screen name="random" component={RandomScreen} />
+        <Stack.Screen name="random" component={RandomActivityScreen} />
         {/* End of Section B */}
-
 
         {/* Section C:
         NOTE: Add all other stack screens that are only reach from OTHER pages HERE */}
-        
+        <Stack.Screen name="QWERTY" component={RandomActivityScreen} />
         {/* End of Section C */}
-
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -137,7 +141,7 @@ const homeStyles = StyleSheet.create({
     marginBottom: Dimensions.get("screen").height / 5,
 
     // Adds even vertical spacing between the buttons//icons:
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   },
   catbutton: {
     position: "relative",
