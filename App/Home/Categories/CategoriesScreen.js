@@ -1,19 +1,8 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import {
-  HealthScreen,
-  FunScreen,
-  MusicalScreen,
-  OutdoorsScreen,
-  LearningScreen,
-  RandomScreen,
-} from "./categoryScreens";
-
-export function CategoriesScreen({ navigation }) {
+export default function CategoriesScreen({ navigation }) {
   return (
     <View style={categoryStyles.container}>
       <TouchableOpacity onPress={() => navigation.navigate("health")}>
@@ -42,24 +31,6 @@ export function CategoriesScreen({ navigation }) {
     </View>
   );
 }
-
-//const Stack = createStackNavigator();
-
-/*function categories() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="categories" component={CategoriesScreen} />
-        <Stack.Screen name="health" component={HealthScreen} />
-        <Stack.Screen name="fun" component={FunScreen} />
-        <Stack.Screen name="music" component={MusicalScreen} />
-        <Stack.Screen name="outdoors" component={OutdoorsScreen} />
-        <Stack.Screen name="learning" component={LearningScreen} />
-        <Stack.Screen name="random" component={RandomScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}*/
 
 // TODO: Change these heights so that they relate to screen dimensions, not absolute numbers
 /* NOTE: Notice how I changed the name of this style sheet. This is to avoid name collision when
