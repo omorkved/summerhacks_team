@@ -1,32 +1,38 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Dimensions,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 
 export default function CategoriesScreen({ navigation }) {
   return (
     <View style={categoryStyles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate("health")}>
-        <Text style={categoryStyles.healthButton}>HEALTH</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate("fun")}>
-        <Text style={categoryStyles.funButton}>FUN</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate("music")}>
-        <Text style={categoryStyles.musicalButton}>MUSIC</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("indoors")}>
+        <Text style={categoryStyles.indoorsButton}>Indoors</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("outdoors")}>
-        <Text style={categoryStyles.outdoorsButton}>OUTDOORS</Text>
+        <Text style={categoryStyles.outdoorsButton}>Outdoors</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate("health")}>
+        <Text style={categoryStyles.healthButton}>Health</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate("fun")}>
+        <Text style={categoryStyles.funButton}>Fun</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("learning")}>
-        <Text style={categoryStyles.learningButton}>LEARNING</Text>
+        <Text style={categoryStyles.learningButton}>Learning</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("random")}>
-        <Text style={categoryStyles.randomButton}>RANDOM</Text>
+        <Text style={categoryStyles.randomButton}>Surprise</Text>
       </TouchableOpacity>
     </View>
   );
@@ -35,84 +41,116 @@ export default function CategoriesScreen({ navigation }) {
 // TODO: Change these heights so that they relate to screen dimensions, not absolute numbers
 /* NOTE: Notice how I changed the name of this style sheet. This is to avoid name collision when
         I import it into App.ks */
+const font = "Gill Sans";
+
 const categoryStyles = StyleSheet.create({
-  healthButton: {
+  container: {
+    backgroundColor: "#FFF",
+  },
+  indoorsButton: {
     position: "absolute",
-    width: 180,
-    height: 180,
-    left: 20,
-    top: 80,
+    width: Dimensions.get("screen").width / 2.3,
+    height: Dimensions.get("screen").width / 2.3,
+    left: Dimensions.get("screen").width / 23,
+    top: Dimensions.get("screen").height / 20,
     backgroundColor: "dodgerblue",
     borderRadius: 12,
     color: "white",
     fontSize: 24,
-    fontWeight: "bold",
     overflow: "hidden",
-  },
-  funButton: {
-    position: "absolute",
-    width: 180,
-    height: 180,
-    left: 220,
-    top: 80,
-    backgroundColor: "gold",
-    borderRadius: 12,
-    color: "white",
-    fontSize: 24,
-    fontWeight: "bold",
-    overflow: "hidden",
-  },
-  musicalButton: {
-    position: "absolute",
-    width: 180,
-    height: 180,
-    left: 20,
-    top: 280,
-    backgroundColor: "tomato",
-    borderRadius: 12,
-    color: "white",
-    fontSize: 24,
-    fontWeight: "bold",
-    overflow: "hidden",
+    padding: 5,
+    fontFamily: font,
   },
   outdoorsButton: {
     position: "absolute",
-    width: 180,
-    height: 180,
-    left: 220,
-    top: 280,
+    width: Dimensions.get("screen").width / 2.3,
+    height: Dimensions.get("screen").width / 2.3,
+    left:
+      Dimensions.get("screen").width / 23 +
+      Dimensions.get("screen").width / 2.3 +
+      Dimensions.get("screen").width / 23,
+    top: Dimensions.get("screen").height / 20,
     backgroundColor: "yellowgreen",
     borderRadius: 12,
     color: "white",
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: font,
     overflow: "hidden",
+    padding: 5,
+  },
+  healthButton: {
+    position: "absolute",
+    width: Dimensions.get("screen").width / 2.3,
+    height: Dimensions.get("screen").width / 2.3,
+    left: Dimensions.get("screen").width / 23,
+    top:
+      Dimensions.get("screen").height / 20 +
+      Dimensions.get("screen").width / 2.3 +
+      Dimensions.get("screen").width / 23,
+    backgroundColor: "tomato",
+    borderRadius: 12,
+    color: "white",
+    fontSize: 24,
+    fontFamily: font,
+    overflow: "hidden",
+    padding: 5,
+  },
+  funButton: {
+    position: "absolute",
+    width: Dimensions.get("screen").width / 2.3,
+    height: Dimensions.get("screen").width / 2.3,
+    left:
+      Dimensions.get("screen").width / 23 +
+      Dimensions.get("screen").width / 2.3 +
+      Dimensions.get("screen").width / 23,
+    top:
+      Dimensions.get("screen").height / 20 +
+      Dimensions.get("screen").width / 2.3 +
+      Dimensions.get("screen").width / 23,
+    backgroundColor: "gold",
+    borderRadius: 12,
+    color: "white",
+    fontSize: 24,
+    fontFamily: font,
+    overflow: "hidden",
+    padding: 5,
   },
   learningButton: {
     position: "absolute",
-    width: 180,
-    height: 180,
-    left: 20,
-    top: 480,
+    width: Dimensions.get("screen").width / 2.3,
+    height: Dimensions.get("screen").width / 2.3,
+    left: Dimensions.get("screen").width / 23,
+    top:
+      Dimensions.get("screen").height / 20 +
+      (2 * Dimensions.get("screen").width) / 2.3 +
+      (2 * Dimensions.get("screen").width) / 23,
     backgroundColor: "sandybrown",
     borderRadius: 12,
     color: "white",
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: font,
     overflow: "hidden",
+    padding: 5,
   },
   randomButton: {
     position: "absolute",
-    width: 180,
-    height: 180,
-    left: 220,
-    top: 480,
+    width: Dimensions.get("screen").width / 2.3,
+    height: Dimensions.get("screen").width / 2.3,
+    left:
+      Dimensions.get("screen").width / 23 +
+      Dimensions.get("screen").width / 2.3 +
+      Dimensions.get("screen").width / 23,
+    top:
+      Dimensions.get("screen").height / 20 +
+      (2 * Dimensions.get("screen").width) / 2.3 +
+      (2 * Dimensions.get("screen").width) / 23,
     backgroundColor: "slateblue",
     borderRadius: 12,
     color: "white",
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: font,
     overflow: "hidden",
+    padding: 5,
   },
 });
 //export default App;

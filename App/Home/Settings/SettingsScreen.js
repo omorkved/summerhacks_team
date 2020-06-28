@@ -10,7 +10,11 @@ import {
   TextInput,
   Alert,
   Switch,
+  View,
+  Image,
 } from "react-native";
+
+import { Container, Header, Content, DatePicker } from "native-base";
 
 //TODO Remove "default" upon pull to master
 export default class SettingsScreen extends Component {
@@ -47,6 +51,7 @@ export default class SettingsScreen extends Component {
 
   state = {
     buttonOne: "Change User Name",
+    buttonFive: "Change Birth Date",
     buttonTwo: "Change Favorite Color",
     buttonThree: "Change Time Zone",
     buttonFour: "Help",
@@ -59,30 +64,49 @@ export default class SettingsScreen extends Component {
 
       // onPress={createThreeButtonAlert}
       <SafeAreaView style={settingsStyles.container}>
-        <Text style={settingsStyles.heading}> Settings</Text>
+        <View style={settingsStyles.profileImage}>
+          <Image
+            source={require("../assets/stockProfile.png")}
+            style={settingsStyles.image}
+            resizeMode="center"
+          ></Image>
+        </View>
+
+        <View style={settingsStyles.infoContainer}>
+          <Text
+            style={[settingsStyles.text, { fontWeight: "200", fontSize: 36 }]}
+          >
+            Julie
+          </Text>
+          <Text
+            style={[settingsStyles.text, { color: "#AEB5BC", fontSize: 14 }]}
+          >
+            @julielastname
+          </Text>
+        </View>
+
         <TouchableOpacity>
-          <Text style={settingsStyles.button_disp}>{this.state.buttonOne}</Text>
+          <Text style={settingsStyles.buttons}>{this.state.buttonOne}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity>
-          <Text style={settingsStyles.button_disp} onPress={this.myColorAlert}>
+          <Text style={settingsStyles.buttons}>{this.state.buttonFive}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Text style={settingsStyles.buttons} onPress={this.myColorAlert}>
             {this.state.buttonTwo}
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity>
-          <Text style={settingsStyles.button_disp}>
-            {this.state.buttonThree}
-          </Text>
+          <Text style={settingsStyles.buttons}>{this.state.buttonThree}</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={settingsStyles.button_disp}>
-            {this.state.buttonFour}
-          </Text>
+          <Text style={settingsStyles.buttons}>{this.state.buttonFour}</Text>
         </TouchableOpacity>
 
         <Switch
-          style={settingsStyles.switch_disp}
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={this.isEnabled ? "#f5dd4b" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
@@ -95,42 +119,49 @@ export default class SettingsScreen extends Component {
     );
   }
 }
+//font is overall font for entire app - is declared on each .js file
+const font = "Gill Sans";
 
 const settingsStyles = StyleSheet.create({
   container: {
+    alignItems: "center",
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    alignContent: "center",
-    marginBottom: Dimensions.get("screen").height / 5,
+    backgroundColor: "#fff",
     justifyContent: "space-evenly",
   },
-  button_disp: {
-    textAlign: "center",
+  text: {
     fontWeight: "bold",
-
-    //font sizing should be based off screens, not an absolute number
-    fontSize: Dimensions.get("screen").height / 40,
-    backgroundColor: "gray",
-
-    //I think this is a good width since there is only one column
-    // of buttons
-    width: Dimensions.get("screen").width / 3,
-
-    //Left margin IS needed
-    marginLeft: Dimensions.get("screen").width / 3,
-
-    //Top margin NOT needed due to even spacing with justifyContent
-    //marginTop: Dimensions.get("screen").height / 12,
+    fontFamily: font,
+    color: "#52575D",
   },
-  switch_disp: {
-    marginLeft: Dimensions.get("screen").width / 3,
+  infoContainer: {
+    alignSelf: "center",
+    alignItems: "center",
+  },
+  buttons: {
+    height: Dimensions.get("screen").height / 18,
+    width: Dimensions.get("screen").width / 1.1,
+    backgroundColor: "yellowgreen",
+    borderRadius: 12,
+    color: "white",
+    fontFamily: font,
+    fontSize: 24,
+    overflow: "hidden",
+    padding: 10,
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
   },
   // "Settings" headings
-  heading: {
-    fontWeight: "bold",
-    fontSize: Dimensions.get("screen").height / 20,
-    marginLeft: Dimensions.get("screen").width / 3,
-    marginTop: Dimensions.get("screen").height / 15,
-    //fontFamily: "Calibri",
+  profileImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    overflow: "hidden",
+  },
+  image: {
+    flex: 1,
+    height: undefined,
+    width: undefined,
   },
 });

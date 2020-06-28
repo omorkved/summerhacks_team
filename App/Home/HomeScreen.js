@@ -1,6 +1,7 @@
 import React from "react";
 
 import {
+  View,
   Text,
   Button,
   StyleSheet,
@@ -9,55 +10,78 @@ import {
   Platform,
   Dimensions,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
+
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  Icon,
+  Left,
+  Right,
+  Body,
+} from "native-base";
 
 export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={homeStyles.container}>
-      <Text style={{ fontWeight: "bold" }}> CURRENT HOME SCREEN</Text>
-      <Image
-        source={{
-          width: 375,
-          height: 263,
-          uri:
-            "https://i2.wp.com/www.danthatscool.com/wp-content/uploads/2016/01/hamsterball.gif",
-        }}
-      />
-      <Button
-        title="Categories"
-        height="300"
-        width="50%"
-        onPress={() => navigation.navigate("Categories")}
-      />
-      <Button
-        title="Settings"
-        onPress={() => navigation.navigate("Settings")}
-      />
+      <View>
+        <Image
+          source={{
+            width: Dimensions.get("screen").width,
+            height: Dimensions.get("screen").height / 3,
+            uri:
+              "https://i2.wp.com/www.danthatscool.com/wp-content/uploads/2016/01/hamsterball.gif",
+          }}
+        />
+        <Text style={homeStyles.header}>App Name Here</Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Categories")}>
+          <Text style={homeStyles.buttons}>Get Started</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Text style={homeStyles.buttons}>Progress</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+          <Text style={homeStyles.buttons}>My Profile</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
 
+const font = "Gill Sans";
+
 const homeStyles = StyleSheet.create({
   container: {
+    backgroundColor: "#fff",
+    alignItems: "center",
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    alignContent: "center",
-    marginBottom: Dimensions.get("screen").height / 5,
-
-    // Adds even vertical spacing between the buttons//icons:
-    justifyContent: "space-evenly",
   },
-  catbutton: {
-    position: "relative",
-    width: 180,
-    height: 180,
-    left: 20,
-    top: 80,
-    backgroundColor: "dodgerblue",
+  header: {
+    top: Dimensions.get("screen").height / 50,
+    textAlign: "center",
+    fontFamily: font,
+    fontSize: Dimensions.get("screen").height / 20,
+    marginTop: 20,
+    marginBottom: Dimensions.get("screen").height / 10,
+  },
+  buttons: {
+    height: Dimensions.get("screen").height / 18,
+    backgroundColor: "yellowgreen",
     borderRadius: 12,
     color: "white",
+    fontFamily: font,
     fontSize: 24,
-    fontWeight: "bold",
     overflow: "hidden",
+    padding: 10,
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
   },
 });

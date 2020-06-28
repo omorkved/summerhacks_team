@@ -9,10 +9,10 @@ import HomeScreen from "./Home/HomeScreen";
 import SettingsScreen from "./Home/Settings/SettingsScreen";
 import CategoriesScreen from "./Home/Categories/CategoriesScreen";
 import {
+  IndoorsScreen,
+  OutdoorsScreen,
   HealthScreen,
   FunScreen,
-  MusicalScreen,
-  OutdoorsScreen,
   LearningScreen,
   RandomScreen,
 } from "./Home/Categories/IndividualCategories/categoryScreens";
@@ -37,18 +37,19 @@ function App() {
           options={{ title: "Categories" }}
         />
         <Stack.Screen
-          name="Settings"
+          name="Profile"
           component={SettingsScreen}
-          options={{ title: "Settings" }}
+          options={{ title: "Profile" }}
         />
+
         {/* End of Section A */}
 
         {/* Section B: Category Pages's Stack Screens */}
         <Stack.Screen name="categories" component={CategoriesScreen} />
+        <Stack.Screen name="indoors" component={IndoorsScreen} />
+        <Stack.Screen name="outdoors" component={OutdoorsScreen} />
         <Stack.Screen name="health" component={HealthScreen} />
         <Stack.Screen name="fun" component={FunScreen} />
-        <Stack.Screen name="music" component={MusicalScreen} />
-        <Stack.Screen name="outdoors" component={OutdoorsScreen} />
         <Stack.Screen name="learning" component={LearningScreen} />
         <Stack.Screen name="random" component={RandomScreen} />
         {/* End of Section B */}
