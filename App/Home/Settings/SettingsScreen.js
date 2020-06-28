@@ -66,7 +66,7 @@ export default class SettingsScreen extends Component {
       <SafeAreaView style={settingsStyles.container}>
         <View style={settingsStyles.profileImage}>
           <Image
-            source={require("../assets/stockProfile.png")}
+            source={require("./stockProfile.png")}
             style={settingsStyles.image}
             resizeMode="center"
           ></Image>
