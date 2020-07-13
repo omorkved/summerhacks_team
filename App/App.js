@@ -9,13 +9,14 @@ import HomeScreen from "./Home/HomeScreen";
 import SettingsScreen from "./Home/Settings/SettingsScreen";
 import CategoriesScreen from "./Home/Categories/CategoriesScreen";
 import {
-  IndoorsScreen,
   OutdoorsScreen,
   HealthScreen,
   FunScreen,
   LearningScreen,
   RandomScreen,
 } from "./Home/Categories/IndividualCategories/categoryScreens";
+
+import IndoorsScreen from "./Home/Categories/IndividualCategories/IndoorsScreen";
 
 /* NAVIGATION */
 const Stack = createStackNavigator();
@@ -46,12 +47,14 @@ function App() {
 
         {/* Section B: Category Pages's Stack Screens */}
         <Stack.Screen name="categories" component={CategoriesScreen} />
-        <Stack.Screen name="indoors" component={IndoorsScreen} />
+
         <Stack.Screen name="outdoors" component={OutdoorsScreen} />
         <Stack.Screen name="health" component={HealthScreen} />
         <Stack.Screen name="fun" component={FunScreen} />
         <Stack.Screen name="learning" component={LearningScreen} />
         <Stack.Screen name="random" component={RandomScreen} />
+        <Stack.Screen name="indoors" component={IndoorsScreen} />
+
         {/* End of Section B */}
 
         {/* Section C:

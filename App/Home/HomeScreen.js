@@ -13,17 +13,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import {
-  Container,
-  Header,
-  Title,
-  Content,
-  Icon,
-  Left,
-  Right,
-  Body,
-} from "native-base";
-
 export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={homeStyles.container}>
