@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./Home/HomeScreen";
 import SettingsScreen from "./Home/Settings/SettingsScreen";
 import CategoriesScreen from "./Home/Categories/CategoriesScreen";
+import ProgressScreen from "./Home/Progress/ProgressScreen";
 import {
   OutdoorsScreen,
   HealthScreen,
@@ -36,6 +37,11 @@ function App() {
           name="Categories"
           component={CategoriesScreen}
           options={{ title: "Categories" }}
+        />
+        <Stack.Screen
+          name="Progress"
+          component={ProgressScreen}
+          options={{ title: "Progress" }}
         />
         <Stack.Screen
           name="Profile"

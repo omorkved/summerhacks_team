@@ -31,7 +31,7 @@ export default function HomeScreen({ navigation }) {
           <Text style={homeStyles.buttons}>Get Started</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Progress")}>
           <Text style={homeStyles.buttons}>Progress</Text>
         </TouchableOpacity>
 
@@ -72,5 +72,6 @@ const homeStyles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 10,
     marginRight: 10,
+    textAlign: "center",
   },
 });

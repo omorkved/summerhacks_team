@@ -3,32 +3,27 @@
     {
       "id": "1",
       "identifier": "Draw a Picture",
-      "description": "Set a timer for 20 minutes and draw the most beautiful picture you can of someone in your family. Ideas for who to draw can include you mom, dad, sibling, dog, cat, fish, and more. Be creative and use lots of color!",
+      "description": "Set a timer for 20 minutes and draw the most beautiful picture you can of someone in your family. Ideas for who to draw can include you mom, dad, sibling, dog, cat, fish, and more. Be creative and use lots of color!"
     },
     {
       "id": "2",
       "identifier": "Count your Stairs",
-      "description": "Go and count your stairs",
-      
+      "description": "Go and count your stairs"
     },
     {
       "id": "3",
       "identifier": "Read a Book",
-      "description": "Read 20 pages of your book. bonus points for summarizing what you read later to a friend ",
-      
+      "description": "Read 20 pages of your book. bonus points for summarizing what you read later to a friend "
     },
     {
       "id": "4",
       "identifier": "Paper Airplane Design",
-      "description": "Fold the best paper airplane and see if you can get it to stay in the air for over 5 seconds!",
-      
+      "description": "Fold the best paper airplane and see if you can get it to stay in the air for over 5 seconds!"
     },
     {
       "id": "5",
       "identifier": "Learn a Card Trick",
-      "description": "Search up a tutorial for a cool card trick and practice so you can perform it for your family and friends later.",
-      
-    },
-    
+      "description": "Search up a tutorial for a cool card trick and practice so you can perform it for your family and friends later."
+    }
   ]
 })
