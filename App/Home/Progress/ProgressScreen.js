@@ -10,6 +10,47 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
+import { fdb } from "../../firebase.config";
+import { userId } from "../../firebaseFunctions";
+
+//import console = require("console");
+
+  /* Here is an example of how to listen to the database 
+     The "userId + /todos" line is because that is how I stored
+     the info in the firebase realtime database */
+var lenToDoList = 0;
+var ToDoListener = fdb.ref(userId + '/todos');
+
+// Below is the 'listener'. It runs whenever a change occurs to the databse
+ToDoListener.on('value', function(snapshot) {
+        updateLen(snapshot.val());
+        seeActivityIDs(snapshot.val());
+        // you could add other things here
+        console.log("Listener ran")
+});
+
+function updateLen (valFromDb) {
+  /* The code below simply finds the length of the todolist,
+     which is stored as a dictionary */
+  lenToDoList = Object.keys(valFromDb).length;
+};
+
+function seeActivityIDs(valFromDb) {
+  console.log(Object.keys(valFromDb))
+  // TO DO: Instead of just logging to console, this should be shown to user
+}
+
+/* Here is another example for the most recently added.
+   Right now our db only tracks the one most recent, but perhaps
+   we could store with timestamps so that we can grab the 5-10 most 
+   recently added items, or whatever */
+var mostRecentlyAdded = null;
+var mostRecentListener = fdb.ref('users/' + userId + '/lastAdded');
+
+mostRecentListener.on('value', function(snapshot) {
+  console.log(snapshot.val());
+});
+
 
 export default class ProgressScreen extends Component {
 
@@ -44,8 +85,10 @@ export default class ProgressScreen extends Component {
   render() {
     return (
       <ScrollView style={ProgressStyles.container}>
-        <Text style={ProgressStyles.text}>To Do</Text>
+        { /* Here is an example of how to use the listener */ }
+        <Text>You have { lenToDoList } tasks in your to-do list!</Text>
 
+        <Text style={ProgressStyles.text}>To Do</Text>
         <TouchableOpacity style={{ flexDirection: "row" }}>
           <Image
             style={ProgressStyles.left_image}

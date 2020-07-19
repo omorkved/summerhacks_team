@@ -36,6 +36,9 @@ export default class Practice extends Component {
        in the CategoriesScreen file. See https://reactnavigation.org/docs/params for more */
     this.activityType = props.route.params.activityType;
 
+
+    /* This tells the screen which data to populate with
+       TO DO: update this to include all possible options */
     if (this.activityType == "indoors") {
       this.dataFromJSON = fullData.indoors;
       console.log("Indoors Screen");

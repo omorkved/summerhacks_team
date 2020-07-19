@@ -6,17 +6,6 @@ import { fdb } from './firebase.config.js';
 // TO DO: Write a function to determine userId (need to set up authentication first)
 export const userId = "test3";
 
-function errCheck (err) {
-      // error handling from Realtime Database docs
-    if (err) {
-	console.log("ERR: Unable to store in database");
-	// Do something here so that app continues to function                                                                           
-    } else {
-	console.log("SUCCESS: Stored in Busy Beagle databse");
-    }
-}
-
-
 export function addTask(userId, activityId) {
     // "set" writes new data
   fdb.ref('users/' + userId).set({
@@ -59,28 +48,25 @@ export function removeTask(userId, activityId){
 
     fdb.ref('users/' + userId).set({
 	    lastRemoved: activityId
-	},
-	function(error) {
+	}, function(error) {
 	    if (error) {
-		console.log("ERR: Unable to track removal request in database");
-		// Do something here so that app continues to function                                                                               
+		console.log("ERR: Unable to track removal request in database");                                                                             
 	    } else {
-		console.log("SUCCESS: Stored most recently removed in Busy Beagle databse");
+		console.log("SUCCESS: Stored most recently removed in Busy Beagle database");
 	    }}
 	);
 
     fdb.ref(userId + '/todos').update({
 	    [activityId] : null,
-	},
-	function(error) {
+	}, function(error) {
 	    if (error) {
 		console.log("ERR: Unable to remove activity from  database");
-		// Do something here so that app continues to function                                                                           
 	    } else {
 		console.log("SUCCESS: Removed from activity to-do list in Busy Beagle database");
 	    }}
 	);
-
-
-return
+	return;
 }
+
+
+
