@@ -85,7 +85,7 @@ export default class Practice extends Component {
                   uri: "https://image.flaticon.com/icons/png/512/10/10869.png",
                 }}
               ></Image>
-              <Text style={practiceStyles.text}>{this.itemDescription || "Select an activity above"}</Text>
+              <Text style={practiceStyles.text}>{this.itemDescription}</Text>
               <TouchableOpacity
                 onPress={() => {
                   this.setState({ show: false });
@@ -98,9 +98,14 @@ export default class Practice extends Component {
               >
                 <Text style={practiceStyles.decisions}>Yes</Text>
               </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() => {
                   this.setState({ show: false });
+                  this.itemName = "Select a Different Activity"
+                  this.itemDescription = "Select a Different Activity from the list above"
+                  this.itemId = undefined;
+                  // TO DO: Do we want this to auto-select a new activity, instead?
                 }}
               >
                 <Text style={practiceStyles.decisions}>No</Text>
