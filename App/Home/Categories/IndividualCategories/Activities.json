@@ -1,4 +1,4 @@
-(fullData = {
+{
   "indoors": [
     {
       "id": "1",
@@ -26,4 +26,4 @@
       "description": "Search up a tutorial for a cool card trick and practice so you can perform it for your family and friends later."
     }
   ]
-})
+}

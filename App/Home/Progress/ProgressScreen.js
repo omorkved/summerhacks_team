@@ -12,6 +12,11 @@ import {
 } from "react-native";
 
 export default class ProgressScreen extends Component {
+
+  //TO DO: Let's make this scalable. There should be one general "to do" alert 
+  // that can populate based on the TO DO LIST
+  // and one general "you did ___ on ___" alert than can populate based on the
+  // ACCOMPLISHMENT List
   myDanceAlert = () =>
     Alert.alert(
       "To Do",

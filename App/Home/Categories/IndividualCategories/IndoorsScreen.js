@@ -14,15 +14,20 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import fullData from "./Activities.json";
+//import fullData from "./Activities.json";
+import * as fullData from "./Activities.json";
 import ActivityCell from "./ActivityCell";
+import { addTask, userId } from "../../../firebaseFunctions"
 
 export default class Practice extends Component {
   constructor(props) {
     super(props);
     this.state = { navigator: props.navigation, show: false };
     this.goToDetailed = this.goToDetailed.bind(this);
+    this.itemName = "Select an activity";
+    this.itemDescription= "Select an activity from the above list";
   }
+  
 
   render(props) {
     return (
@@ -32,10 +37,14 @@ export default class Practice extends Component {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={practiceStyles.gridCell}
+              // Only one activity will be selected at a time, so set its metadata as global values
               onPress={() => {
                 this.setState({ show: true });
-                global.itemName = item.identifier;
-                global.itemDescription = item.description;
+                // TO DO: Let's change this to not use global vars at some pt -- to avoid
+                //        accidental conflicts between variable names
+                this.itemName = item.identifier;
+                this.itemDescription = item.description;
+                this.itemId = item.id;
               }}
             >
               <ActivityCell id={item.id} name={item.identifier} />
@@ -63,7 +72,8 @@ export default class Practice extends Component {
                 flex: 1,
               }}
             >
-              <Text style={practiceStyles.heading}>{global.itemName}</Text>
+              {/* The Details Box below the list: */}
+              <Text style={practiceStyles.heading}>{this.itemName}</Text>
               <Image
                 style={{
                   height: Dimensions.get("screen").height / 4.3,
@@ -75,11 +85,16 @@ export default class Practice extends Component {
                   uri: "https://image.flaticon.com/icons/png/512/10/10869.png",
                 }}
               ></Image>
-              <Text style={practiceStyles.text}>{global.itemDescription}</Text>
+              <Text style={practiceStyles.text}>{this.itemDescription || "Select an activity above"}</Text>
               <TouchableOpacity
                 onPress={() => {
                   this.setState({ show: false });
-                }}
+
+                  /* Sends Task to Firebase to record selection
+                      But first checks if an activity with valid Id has been selected */
+                  if (typeof this.itemId !== 'undefined') {
+                  addTask(userId, this.itemId);
+                }}}
               >
                 <Text style={practiceStyles.decisions}>Yes</Text>
               </TouchableOpacity>
