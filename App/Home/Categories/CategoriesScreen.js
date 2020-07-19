@@ -7,11 +7,13 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import * as fullData from "./IndividualCategories/Activities.json";
 
 export default function CategoriesScreen({ navigation }) {
   return (
     <View style={categoryStyles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate("indoors")}>
+      {/*navigation objects include parameters (see documentation on react navigation params) */}
+      <TouchableOpacity onPress={() => navigation.navigate("individualCategory", {activityType: "indoors"})}>
         <Text style={categoryStyles.indoorsButton}>Indoors</Text>
       </TouchableOpacity>
 
@@ -19,10 +21,11 @@ export default function CategoriesScreen({ navigation }) {
         <Text style={categoryStyles.outdoorsButton}>Outdoors</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("health")}>
+      <TouchableOpacity onPress={() => navigation.navigate("individualCategory", {activityType: "health"})}>
         <Text style={categoryStyles.healthButton}>Health</Text>
       </TouchableOpacity>
 
+      {/*To do: change navigation to individualCategory, add param. First need to add some activities to the JSON */}
       <TouchableOpacity onPress={() => navigation.navigate("fun")}>
         <Text style={categoryStyles.funButton}>Fun</Text>
       </TouchableOpacity>

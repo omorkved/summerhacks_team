@@ -1,29 +1,43 @@
 {
   "indoors": [
     {
-      "id": "1",
+      "id": "i1",
       "identifier": "Draw a Picture",
       "description": "Set a timer for 20 minutes and draw the most beautiful picture you can of someone in your family. Ideas for who to draw can include you mom, dad, sibling, dog, cat, fish, and more. Be creative and use lots of color!"
     },
     {
-      "id": "2",
+      "id": "i2",
       "identifier": "Count your Stairs",
       "description": "Go and count your stairs"
     },
     {
-      "id": "3",
+      "id": "i3",
       "identifier": "Read a Book",
       "description": "Read 20 pages of your book. bonus points for summarizing what you read later to a friend "
     },
     {
-      "id": "4",
+      "id": "i4",
       "identifier": "Paper Airplane Design",
       "description": "Fold the best paper airplane and see if you can get it to stay in the air for over 5 seconds!"
     },
     {
-      "id": "5",
+      "id": "i5",
       "identifier": "Learn a Card Trick",
       "description": "Search up a tutorial for a cool card trick and practice so you can perform it for your family and friends later."
+    }
+  ],
+  "health": [
+    {
+      "id": "h1",
+      "identifier": "Jumping Jacks!",
+      "description": "It's fun to jump! Do 20 jumping jacks. Take a break, then do 20 more!",
+      "labels": ["exercise"]
+    },
+    {
+      "id": "h2",
+      "identifier": "Healthy Snack: Fruit",
+      "description": "Time for a snack! Fruit is yummy and gives your body vitamins. Look for a piece of fruit in your kitchen. [may require parents help]",
+      "labels": ["food", "parentHelp"]
     }
   ]
 }
