@@ -48,3 +48,39 @@ export function addTask(userId, activityId) {
   console.log(userId)
   return
 };
+
+
+// Call this function when user decide to un-add a task
+export function removeTask(userId, activityId){
+
+    // Two things: add to "lastRemoved" and remove from "todos" list
+    // lastRemoved is simply a way for us to internally track recent activity
+    // todos list is the actual list of all activityId's that the user wants to do
+
+    fdb.ref('users/' + userId).set({
+	    lastRemoved: activityId
+	},
+	function(error) {
+	    if (error) {
+		console.log("ERR: Unable to track removal request in database");
+		// Do something here so that app continues to function                                                                               
+	    } else {
+		console.log("SUCCESS: Stored most recently removed in Busy Beagle databse");
+	    }}
+	);
+
+    fdb.ref(userId + '/todos').update({
+	    [activityId] : null,
+	},
+	function(error) {
+	    if (error) {
+		console.log("ERR: Unable to remove activity from  database");
+		// Do something here so that app continues to function                                                                           
+	    } else {
+		console.log("SUCCESS: Removed from activity to-do list in Busy Beagle database");
+	    }}
+	);
+
+
+return
+}

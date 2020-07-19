@@ -17,7 +17,7 @@ import {
 //import fullData from "./Activities.json";
 import * as fullData from "./Activities.json";
 import ActivityCell from "./ActivityCell";
-import { addTask, userId } from "../../../firebaseFunctions"
+import { addTask, userId, removeTask } from "../../../firebaseFunctions"
 
 export default class Practice extends Component {
   constructor(props) {
@@ -28,7 +28,9 @@ export default class Practice extends Component {
     this.itemDescription= "Select an activity from the above list";
   }
   
-
+  // TO DO: Activities that the user has already added should not show up, right?
+  /* TO DO: Right now, "Yes" adds to a to-do list. We should then navigate to a second set
+            of choices that says "do now" or "do later", yeah? */
   render(props) {
     return (
       <SafeAreaView style={practiceStyles.container}>
@@ -94,7 +96,8 @@ export default class Practice extends Component {
                       But first checks if an activity with valid Id has been selected */
                   if (typeof this.itemId !== 'undefined') {
                   addTask(userId, this.itemId);
-                }}}
+                  }
+                }}
               >
                 <Text style={practiceStyles.decisions}>Yes</Text>
               </TouchableOpacity>
@@ -102,10 +105,16 @@ export default class Practice extends Component {
               <TouchableOpacity
                 onPress={() => {
                   this.setState({ show: false });
+                  
+                  // "No" option: they reject the activity.
+                  if (typeof this.itemId !== 'undefined') {
+                  removeTask(userId, this.itemId)
+                  }
+                  
+                  // TO DO: Do we want this to auto-select a new activity, instead?
                   this.itemName = "Select a Different Activity"
                   this.itemDescription = "Select a Different Activity from the list above"
                   this.itemId = undefined;
-                  // TO DO: Do we want this to auto-select a new activity, instead?
                 }}
               >
                 <Text style={practiceStyles.decisions}>No</Text>
