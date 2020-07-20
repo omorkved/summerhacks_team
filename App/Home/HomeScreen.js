@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
               "https://i2.wp.com/www.danthatscool.com/wp-content/uploads/2016/01/hamsterball.gif",
           }}
         />
-        <Text style={homeStyles.header}>App Name Here</Text>
+        <Text style={homeStyles.header}>Busy Beagles App</Text>
 
         <TouchableOpacity onPress={() => navigation.navigate("Categories")}>
           <Text style={homeStyles.buttons}>Get Started</Text>
