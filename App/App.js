@@ -7,18 +7,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Internal
 import HomeScreen from "./Home/HomeScreen";
 import SettingsScreen from "./Home/Settings/SettingsScreen";
-import CategoriesScreen from "./Home/Categories/CategoriesScreen";
+import CategoriesScreen from "./Home/Categories/IndividualCategories/CategoriesScreen";
 import ProgressScreen from "./Home/Progress/ProgressScreen";
-import {
-  OutdoorsScreen,
-  HealthScreen,
-  FunScreen,
-  LearningScreen,
-  RandomScreen,
-} from "./Home/Categories/IndividualCategories/categoryScreens";
 
 //import IndoorsScreen from "./Home/Categories/IndividualCategories/IndoorsScreen";
 import IndividualScreensTemplate from "./Home/Categories/IndividualCategories/IndividualScreensTemplate";
+import { RandomActivityScreen } from "./Home/Categories/IndividualCategories/RandomActivityScreen";
 
 /* NAVIGATION */
 const Stack = createStackNavigator();
@@ -54,8 +48,12 @@ function App() {
 
         {/* Section B: Category Pages's Stack Screens */}
         <Stack.Screen name="categories" component={CategoriesScreen} />
-    <Stack.Screen name="individualCategory" component={IndividualScreensTemplate} />
-	{/*  Changed to one generic template that takes in activityType as a parameter in Categories Screen file
+        <Stack.Screen
+          name="individualCategory"
+          component={IndividualScreensTemplate}
+        />
+        <Stack.Screen name="random" component={RandomActivityScreen} />
+        {/*  Changed to one generic template that takes in activityType as a parameter in Categories Screen file
         <Stack.Screen name="outdoors" component={OutdoorsScreen} />
         <Stack.Screen name="health" component={HealthScreen} />
         <Stack.Screen name="fun" component={FunScreen} />

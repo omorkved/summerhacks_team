@@ -13,30 +13,52 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import { mainBeagle } from "../assets/mainBeagle.png";
+
 export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={homeStyles.container}>
       <View>
         <Image
-          source={{
+          source={require("../assets/title.jpeg")}
+          style={{
             width: Dimensions.get("screen").width,
-            height: Dimensions.get("screen").height / 3,
-            uri:
-              "https://i2.wp.com/www.danthatscool.com/wp-content/uploads/2016/01/hamsterball.gif",
+            height: Dimensions.get("screen").height / 6,
+            alignSelf: "center",
+            marginTop: 10,
+            //marginBottom: 10,
           }}
         />
-        <Text style={homeStyles.header}>Busy Beagles App</Text>
+        <Image
+          source={require("../assets/mainImage.png")}
+          style={{
+            width: Dimensions.get("screen").width / 1.1,
+            height: Dimensions.get("screen").height / 3,
+            alignSelf: "center",
+            marginTop: 0,
+            marginBottom: 40,
+          }}
+        />
 
         <TouchableOpacity onPress={() => navigation.navigate("Categories")}>
-          <Text style={homeStyles.buttons}>Get Started</Text>
+          <Image
+            source={require("../assets/getStarted.jpeg")}
+            style={homeStyles.buttons}
+          ></Image>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate("Progress")}>
-          <Text style={homeStyles.buttons}>Progress</Text>
+          <Image
+            source={require("../assets/Progress.jpeg")}
+            style={homeStyles.buttons}
+          ></Image>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-          <Text style={homeStyles.buttons}>My Profile</Text>
+          <Image
+            source={require("../assets/myProfile.jpeg")}
+            style={homeStyles.buttons}
+          ></Image>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -58,20 +80,16 @@ const homeStyles = StyleSheet.create({
     fontFamily: font,
     fontSize: Dimensions.get("screen").height / 20,
     marginTop: 20,
-    marginBottom: Dimensions.get("screen").height / 10,
+    marginBottom: Dimensions.get("screen").height / 25,
   },
   buttons: {
-    height: Dimensions.get("screen").height / 18,
-    backgroundColor: "yellowgreen",
-    borderRadius: 12,
-    color: "white",
-    fontFamily: font,
-    fontSize: 24,
+    height: Dimensions.get("screen").height / 10,
+    width: Dimensions.get("screen").width / 1.5,
     overflow: "hidden",
-    padding: 10,
-    marginTop: 20,
+    padding: 5,
+    //marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
-    textAlign: "center",
+    alignSelf: "center",
   },
 });

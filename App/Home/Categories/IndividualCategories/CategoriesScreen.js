@@ -7,30 +7,56 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import * as fullData from "./IndividualCategories/Activities.json";
+//import * as fullData from "./IndividualCategories/Activities.json";
 
 export default function CategoriesScreen({ navigation }) {
   return (
     <View style={categoryStyles.container}>
       {/*navigation objects include parameters (see documentation on react navigation params) */}
-      <TouchableOpacity onPress={() => navigation.navigate("individualCategory", {activityType: "indoors"})}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("individualCategory", { activityType: "indoors" })
+        }
+      >
         <Text style={categoryStyles.indoorsButton}>Indoors</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("outdoors")}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("individualCategory", {
+            activityType: "outdoors",
+          })
+        }
+      >
         <Text style={categoryStyles.outdoorsButton}>Outdoors</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("individualCategory", {activityType: "health"})}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("individualCategory", { activityType: "health" })
+        }
+      >
         <Text style={categoryStyles.healthButton}>Health</Text>
       </TouchableOpacity>
 
       {/*To do: change navigation to individualCategory, add param. First need to add some activities to the JSON */}
-      <TouchableOpacity onPress={() => navigation.navigate("fun")}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("individualCategory", {
+            activityType: "fun",
+          })
+        }
+      >
         <Text style={categoryStyles.funButton}>Fun</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("learning")}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("individualCategory", {
+            activityType: "learning",
+          })
+        }
+      >
         <Text style={categoryStyles.learningButton}>Learning</Text>
       </TouchableOpacity>
 

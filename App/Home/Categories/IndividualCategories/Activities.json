@@ -3,27 +3,64 @@
     {
       "id": "i1",
       "identifier": "Draw a Picture",
-      "description": "Set a timer for 20 minutes and draw the most beautiful picture you can of someone in your family. Ideas for who to draw can include you mom, dad, sibling, dog, cat, fish, and more. Be creative and use lots of color!"
+      "description": "Set a timer for 20 minutes and draw the best picture you can of someone in your family. Ideas for who to draw can include you mom, dad, sibling, dog, cat, fish, and more. Be creative and use lots of color!"
     },
     {
       "id": "i2",
       "identifier": "Count your Stairs",
-      "description": "Go and count your stairs"
+      "description": "Find every staircase in your house and count the total number of steps! Done forget any outdoor steps. Optional: Ask you friends and family how many steps they think there are and see who guesses the closest!"
     },
     {
       "id": "i3",
       "identifier": "Read a Book",
-      "description": "Read 20 pages of your book. bonus points for summarizing what you read later to a friend "
+      "description": "Read 20 pages of your favorite book. Bonus points for summarizing what you read later to a friend or family member."
     },
     {
       "id": "i4",
       "identifier": "Paper Airplane Design",
-      "description": "Fold the best paper airplane and see if you can get it to stay in the air for over 5 seconds!"
+      "description": "Fold the best paper airplane and see if you can get it to stay in the air for over 5 seconds! Try out different models and types of material to see which work the best."
     },
     {
       "id": "i5",
       "identifier": "Learn a Card Trick",
-      "description": "Search up a tutorial for a cool card trick and practice so you can perform it for your family and friends later."
+      "description": "Search up a tutorial for a cool card trick online and practice so you can perform it for your family and friends later. Bonus points if you make a wand and top hat to look like a true magician."
+    },
+    {
+      "id": "i6",
+      "identifier": "Dance Party",
+      "description": "Play your favorite dancing music and have a dance party around your house. Make sure to show off your best moves!!"
+    },
+    {
+      "id": "i7",
+      "identifier": "Origami Time",
+      "description": "Create an origami animal. Feel free to look up a tutorial online or just wing it and design your own. Ideas include an origami dragon, dog, swan, squirrel, and much more!"
+    }
+  ],
+  "outdoors": [
+    {
+      "id": "o1",
+      "identifier": "Play a Sport",
+      "description": "Go searching around your house for a soccer ball, basketball, volley ball, or any other ball you can find! Go outside and play with it for 15 minutes. Get creative and set up challenges for yourself like working on your aim or how far youcan kick the ball."
+    },
+    {
+      "id": "o2",
+      "identifier": "Go for a Walk",
+      "description": "Go for a walk in your neighborhood! Take a friend, family member, or a pet."
+    },
+    {
+      "id": "o3",
+      "identifier": "Plant Search",
+      "description": "Look around your backyard and try to find at leats 5 different types of plants. Take pictures of them on your phone to show you friends and family later. Bonus points for looking up what kind of plants you found!"
+    },
+    {
+      "id": "o4",
+      "identifier": "Drawing with Chalk",
+      "description": "If you have chalk laying around at your house, go outside and draw all over your driveway! Get creative and use lots of different colors. Make sure to help your parent clean it up later though!"
+    },
+    {
+      "id": "o5",
+      "identifier": "House Marathon",
+      "description": "Set a timer and see how quickly youcan run 3 full laps around your house! Ask a friend or family member to do it as well to test who is faster."
     }
   ],
   "health": [
@@ -36,8 +73,52 @@
     {
       "id": "h2",
       "identifier": "Healthy Snack: Fruit",
-      "description": "Time for a snack! Fruit is yummy and gives your body vitamins. Look for a piece of fruit in your kitchen. [may require parents help]",
+      "description": "Time for a snack! Fruit is yummy and gives your body vitamins. Look for a piece of fruit in your kitchen and eat up.",
       "labels": ["food", "parentHelp"]
+    },
+    {
+      "id": "h3",
+      "identifier": "Hydration Time",
+      "description": "When's the last time you drank some water? Go get a large glass of water and drink up. This will keep your body feeling healthy and ready for a great day."
+    },
+    {
+      "id": "h4",
+      "identifier": "Plank Exercise",
+      "description": "Hold a push-up position for 30 seconds. Add music to make it more fun and easier to pass the time."
+    }
+  ],
+  "fun": [
+    {
+      "id": "f1",
+      "identifier": "Play Video Games",
+      "description": "Boot up your favorite video game and play for 30 minutes! Watch the time and make sure you don't get sucked into playing all day."
+    },
+    {
+      "id": "f2",
+      "identifier": "TV Time",
+      "description": "Turn on the TV and play your favorite TV show or movie. Watch either one episode or 30 minutes of a movie."
+    },
+    {
+      "id": "f3",
+      "identifier": "Snack Hour",
+      "description": "Reward yourself with a quick snack! Make sure it's not too big and something your parents would be okay with you eating."
+    },
+    {
+      "id": "f4",
+      "identifier": "Make an Obstacle Course",
+      "description": "Find lots of supplies around your house like cups, cardboard, tape, and more to build an obstacle course for marbles to roll through."
+    }
+  ],
+  "learning": [
+    {
+      "id": "l1",
+      "identifier": "Backwards ABC's",
+      "description": "Try to chant your ABC's backwards. A great way to do this is write your ABCs out first, say them backwards while looking, and then try to do it without looking after practice....Good luck!"
+    },
+    {
+      "id": "l2",
+      "identifier": "Memorize Pi",
+      "description": "Memorize as many digits of Pi as you can!  Try with memorizing 10 numbers and then keep going until you can't anymore. 3.1415....!"
     }
   ]
 }

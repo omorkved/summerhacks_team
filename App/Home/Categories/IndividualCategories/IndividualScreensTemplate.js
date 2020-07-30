@@ -17,12 +17,12 @@ import {
 
 import * as fullData from "./Activities.json";
 import ActivityCell from "./ActivityCell";
-import { addTask, userId, removeTask } from "../../../firebaseFunctions"
+import { addTask, userId, removeTask } from "../../../firebaseFunctions";
 
 function loggingType(someVar) {
-  console.log(typeof someVar)
-  return
-};
+  console.log(typeof someVar);
+  return;
+}
 
 export default class Practice extends Component {
   constructor(props) {
@@ -30,23 +30,24 @@ export default class Practice extends Component {
     this.state = { navigator: props.navigation, show: false };
     this.goToDetailed = this.goToDetailed.bind(this);
     this.itemName = "Select an activity";
-    this.itemDescription= "Select an activity from the above list";
+    this.itemDescription = "Select an activity from the above list";
 
     /* Can pass other params by specifying a variable name
        in the CategoriesScreen file. See https://reactnavigation.org/docs/params for more */
     this.activityType = props.route.params.activityType;
 
-
     /* This tells the screen which data to populate with
        TO DO: update this to include all possible options */
     if (this.activityType == "indoors") {
       this.dataFromJSON = fullData.indoors;
-      console.log("Indoors Screen");
     } else if (this.activityType == "health") {
       this.dataFromJSON = fullData.health;
-    } else {
-      console.log("ERROR: Unknown screen!")
-      console.log(typeof this.activityType)
+    } else if (this.activityType == "outdoors") {
+      this.dataFromJSON = fullData.outdoors;
+    } else if (this.activityType == "fun") {
+      this.dataFromJSON = fullData.fun;
+    } else if (this.activityType == "learning") {
+      this.dataFromJSON = fullData.learning;
     }
   }
   // TO DO: Activities that the user has already added should not show up, right?
@@ -57,8 +58,7 @@ export default class Practice extends Component {
       <SafeAreaView style={practiceStyles.container}>
         <FlatList
           //data={fullData.indoors}
-          data = {this.dataFromJSON}
-
+          data={this.dataFromJSON}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={practiceStyles.gridCell}
@@ -117,11 +117,11 @@ export default class Practice extends Component {
 
                   /* Sends Task to Firebase to record selection
                       But first checks if an activity with valid Id has been selected */
-                  if (typeof this.itemId !== 'undefined') {
-                  addTask(userId, this.itemId);
+                  if (typeof this.itemId !== "undefined") {
+                    addTask(userId, this.itemId);
                   } else {
                     //this line below is just for debugging
-                    console.log(this.dataFromJSON)
+                    console.log(this.dataFromJSON);
                   }
                 }}
               >
@@ -131,15 +131,16 @@ export default class Practice extends Component {
               <TouchableOpacity
                 onPress={() => {
                   this.setState({ show: false });
-                  
+
                   // "No" option: they reject the activity.
-                  if (typeof this.itemId !== 'undefined') {
-                  removeTask(userId, this.itemId)
+                  if (typeof this.itemId !== "undefined") {
+                    removeTask(userId, this.itemId);
                   }
 
                   // TO DO: Do we want this to auto-select a new activity, instead?
-                  this.itemName = "Select a Different Activity"
-                  this.itemDescription = "Select a Different Activity from the list above"
+                  this.itemName = "Select a Different Activity";
+                  this.itemDescription =
+                    "Select a Different Activity from the list above";
                   this.itemId = undefined;
                 }}
               >
@@ -217,6 +218,6 @@ const practiceStyles = StyleSheet.create({
     width: Dimensions.get("screen").width / 1.15,
     height: Dimensions.get("screen").height / 10,
     borderWidth: 1,
-    borderColor: "#057ba6",
+    borderColor: "dodgerblue",
   },
 });
