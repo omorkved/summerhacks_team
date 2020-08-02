@@ -8,7 +8,7 @@
     {
       "id": "i2",
       "identifier": "Count your Stairs",
-      "description": "Find every staircase in your house and count the total number of steps! Done forget any outdoor steps. Optional: Ask you friends and family how many steps they think there are and see who guesses the closest!"
+      "description": "Find every staircase in your house and count the total number of steps! Don't forget any outdoor steps. Optional: Ask you friends and family how many steps they think there are and see who guesses the closest!"
     },
     {
       "id": "i3",
@@ -34,13 +34,18 @@
       "id": "i7",
       "identifier": "Origami Time",
       "description": "Create an origami animal. Feel free to look up a tutorial online or just wing it and design your own. Ideas include an origami dragon, dog, swan, squirrel, and much more!"
+    },
+    {
+      "id": "i8",
+      "identifier": "Design a house",
+      "description": "Take out a pencil and paper, and draw your dream house. How many rooms does it have? Does it have special rooms, such as a swimming pool or a dance room? Are there any cool features or technologies in your house?"
     }
   ],
   "outdoors": [
     {
       "id": "o1",
       "identifier": "Play a Sport",
-      "description": "Go searching around your house for a soccer ball, basketball, volley ball, or any other ball you can find! Go outside and play with it for 15 minutes. Get creative and set up challenges for yourself like working on your aim or how far youcan kick the ball."
+      "description": "Go searching around your house for a soccer ball, basketball, volley ball, or any other ball you can find! Go outside and play with it for 15 minutes. Get creative and set up challenges for yourself like working on your aim or how far you can kick the ball."
     },
     {
       "id": "o2",
@@ -60,7 +65,17 @@
     {
       "id": "o5",
       "identifier": "House Marathon",
-      "description": "Set a timer and see how quickly youcan run 3 full laps around your house! Ask a friend or family member to do it as well to test who is faster."
+      "description": "Set a timer and see how quickly you can run 3 full laps around your house! Ask a friend or family member to do it as well to test who is faster."
+    },
+    {
+      "id": "o6",
+      "identifier": "Bug Hunt",
+      "description": "Go to your backyard or outdoor space, and search for the coolest bug you can find. What is unique about it? What color is it? How many legs does it have?"
+    },
+    {
+      "id": "o7",
+      "identifier": "Time to Ball",
+      "description": "Take a basketball or other ball. If you have a sibling, ask them to play catch! If you do not, test your dribbling skills. How long can youd dribble? Can you dribble and run at the same time?"
     }
   ],
   "health": [
@@ -100,13 +115,18 @@
     },
     {
       "id": "f3",
-      "identifier": "Snack Hour",
+      "identifier": "Snack Time",
       "description": "Reward yourself with a quick snack! Make sure it's not too big and something your parents would be okay with you eating."
     },
     {
       "id": "f4",
       "identifier": "Make an Obstacle Course",
       "description": "Find lots of supplies around your house like cups, cardboard, tape, and more to build an obstacle course for marbles to roll through."
+    },
+    {
+      "id": "f5",
+      "identifier": "Learn a Magic Trick",
+      "description": "Go to this site and pick one magic trick to learn: https://www.funology.com/funology-magic-tricks/ You can show it to your friends!"
     }
   ],
   "learning": [
@@ -119,6 +139,41 @@
       "id": "l2",
       "identifier": "Memorize Pi",
       "description": "Memorize as many digits of Pi as you can!  Try with memorizing 10 numbers and then keep going until you can't anymore. 3.1415....!"
+    },
+    {
+      "id": "l3",
+      "identifier": "PBS Math Game",
+      "description": "Screen time! Play one math game on https://pbskids.org/games/math/ [This activity may require a computer"
+    },
+    {
+      "id": "l4",
+      "identifier": "Learn about Space",
+      "description": "This website has cool lessons on space, from telescopes to galazies! Pick a topic and make a goal to read for 20 minutes. http://amazingspace.org/"
+    },
+    {
+      "id": "l5",
+      "identifier": "Flag game",
+      "description": "Let's learn about other countries! Play the flag game for 20 minutes. https://www.learninggamesforkids.com/geography-games/random_games/flags.html [This requires a computer]"
+    },
+    {
+      "id": "l6",
+      "identifier": "Writing prompt 1",
+      "description": "Grab pencil and paper. Write for 20 minutes about this prompt: If you were an animal, what would you be? What adventure would you have?"
+    },
+    {
+      "id": "l7",
+      "identifier": "Writing prompt 2",
+      "description": "Grab pencil and paper. Write for 20 minutes about this prompt: Imagine you were given 1 million dollars. What would you do? Write a short story."
+    },
+    {
+      "id": "l8",
+      "identifier": "Writing prompt 3",
+      "description": "Grab pencil and paper. Write for 20 minutes about this prompt: You can have one superpower! What would you pick? Why?."
+    },
+    {
+      "id": "l9",
+      "identifier": "BrainPOP",
+      "description": "Pick a lesson on brainPOP, which has fun educational content. Some ideas: Science, Math. https://www.brainpop.com/"
     }
   ]
 }
