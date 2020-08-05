@@ -14,6 +14,9 @@ import ProgressScreen from "./Home/Progress/ProgressScreen";
 import IndividualScreensTemplate from "./Home/Categories/IndividualCategories/IndividualScreensTemplate";
 import { RandomActivityScreen } from "./Home/Categories/IndividualCategories/RandomActivityScreen";
 
+/* DEBUG */
+console.ignoredYellowBox = ['Setting a timer'];
+
 /* NAVIGATION */
 const Stack = createStackNavigator();
 
