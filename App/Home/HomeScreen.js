@@ -14,8 +14,13 @@ import {
 } from "react-native";
 
 import { mainBeagle } from "../assets/mainBeagle.png";
+// Reference: https://firebase.google.com/docs/auth/web/firebaseui
+import { authConfig, authUI} from "../firebaseAuth.js";
+
+authUI.start('#firebaseui-auth-container', authConfig);
 
 export default function HomeScreen({ navigation }) {
+    authUI.start('#firebaseui-auth-container', authConfig);
   return (
     <SafeAreaView style={homeStyles.container}>
       <View>
@@ -29,6 +34,10 @@ export default function HomeScreen({ navigation }) {
             //marginBottom: 10,
           }}
         />
+    <div id="firebaseui-auth-container"
+    style={{                                                                                                
+                  alignSelf: "center",                                                                        
+	      }}></div>
         <Image
           source={require("../assets/mainImage.png")}
           style={{
