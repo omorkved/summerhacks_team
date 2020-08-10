@@ -1,35 +1,39 @@
 import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
+//import IndividualScreensTemplate from "./IndividualScreensTemplate";
 
 export default function ActivityCell(props) {
   // id, name
+
   return (
     <View style={styles.fillParent}>
-      <Text style={styles.name}>{props.name}</Text>
+      <Text
+        style={{
+          flex: 1,
+          fontFamily: "Gill Sans",
+          fontSize: 20,
+          padding: 10,
+          color: props.color,
+          backgroundColor: "#fff",
+        }}
+      >
+        {props.name}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
-    flex: 4,
-    width: "100%",
-    backgroundColor: "#ffffff",
-    alignItems: "center",
-    resizeMode: "contain",
-    padding: 0,
-  },
   fillParent: {
-    width: "100%",
+    width: "85%",
     flex: 1,
   },
   name: {
     flex: 1,
-
     fontFamily: "Gill Sans",
     fontSize: 20,
     padding: 10,
-    color: "#057ba6",
+    color: global.temp,
     backgroundColor: "#fff",
   },
 });
