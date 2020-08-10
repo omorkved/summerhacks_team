@@ -35,19 +35,25 @@ export default class Practice extends Component {
     /* Can pass other params by specifying a variable name
        in the CategoriesScreen file. See https://reactnavigation.org/docs/params for more */
     this.activityType = props.route.params.activityType;
+    this.categoryColor;
 
     /* This tells the screen which data to populate with
        TO DO: update this to include all possible options */
     if (this.activityType == "indoors") {
       this.dataFromJSON = fullData.indoors;
+      this.categoryColor = "dodgerblue";
     } else if (this.activityType == "health") {
       this.dataFromJSON = fullData.health;
+      this.categoryColor = "tomato";
     } else if (this.activityType == "outdoors") {
       this.dataFromJSON = fullData.outdoors;
+      this.categoryColor = "yellowgreen";
     } else if (this.activityType == "fun") {
       this.dataFromJSON = fullData.fun;
+      this.categoryColor = "gold";
     } else if (this.activityType == "learning") {
       this.dataFromJSON = fullData.learning;
+      this.categoryColor = "sandybrown";
     }
   }
   // TO DO: Activities that the user has already added should not show up, right?
@@ -61,18 +67,33 @@ export default class Practice extends Component {
           data={this.dataFromJSON}
           renderItem={({ item }) => (
             <TouchableOpacity
-              style={practiceStyles.gridCell}
-              // Only one activity will be selected at a time, so set its metadata as global values
+              style={{
+                backgroundColor: "#fff",
+                margin: 10,
+                flex: 1,
+                flexDirection: "column",
+                alignSelf: "center",
+                width: Dimensions.get("screen").width / 1.15,
+                height: Dimensions.get("screen").height / 10,
+                borderWidth: 2,
+                borderColor: this.categoryColor,
+              }}
+              //style had to be manually written out ^^ or categoryColor could not be read
+              // Only one activity will be selected at a time, so set its metadata as this values
               onPress={() => {
                 this.setState({ show: true });
-                // TO DO: Let's change this to not use global vars at some pt -- to avoid
+                // TO DO: Let's change this to not use this vars at some pt -- to avoid
                 //        accidental conflicts between variable names
                 this.itemName = item.identifier;
                 this.itemDescription = item.description;
                 this.itemId = item.id;
               }}
             >
-              <ActivityCell id={item.id} name={item.identifier} />
+              <ActivityCell
+                id={item.id}
+                name={item.identifier}
+                color={this.categoryColor}
+              />
             </TouchableOpacity>
           )}
           keyExtractor={(item) => item.id}
@@ -85,14 +106,14 @@ export default class Practice extends Component {
               backgroundColor: "#000000aa",
               flex: 1,
               paddingHorizontal: 10,
-              paddingVertical: 100,
+              paddingVertical: Dimensions.get("screen").height / 15,
             }}
           >
             <View
               style={{
                 backgroundColor: "#ffffff",
-                margin: 20,
-                padding: 10,
+                margin: 10,
+                padding: 0,
                 borderRadius: 10,
                 flex: 1,
               }}
@@ -101,14 +122,12 @@ export default class Practice extends Component {
               <Text style={practiceStyles.heading}>{this.itemName}</Text>
               <Image
                 style={{
-                  height: Dimensions.get("screen").height / 4.3,
+                  height: Dimensions.get("screen").height / 4.5,
                   width: Dimensions.get("screen").width / 2,
                   alignSelf: "center",
                   margin: 20,
                 }}
-                source={{
-                  uri: "https://image.flaticon.com/icons/png/512/10/10869.png",
-                }}
+                source={require("/Users/tessvandaele/Documents/summerhacks_team/App/assets/medal.png")}
               ></Image>
               <Text style={practiceStyles.text}>{this.itemDescription}</Text>
               <TouchableOpacity
@@ -125,7 +144,22 @@ export default class Practice extends Component {
                   }
                 }}
               >
-                <Text style={practiceStyles.decisions}>Yes</Text>
+                <Text
+                  style={{
+                    height: Dimensions.get("screen").height / 20,
+                    backgroundColor: this.categoryColor,
+                    borderRadius: 12,
+                    color: "white",
+                    fontFamily: "Gill Sans",
+                    fontSize: 20,
+                    overflow: "hidden",
+                    padding: 5,
+                    margin: 10,
+                    textAlign: "center",
+                  }}
+                >
+                  Yes
+                </Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -144,7 +178,22 @@ export default class Practice extends Component {
                   this.itemId = undefined;
                 }}
               >
-                <Text style={practiceStyles.decisions}>No</Text>
+                <Text
+                  style={{
+                    height: Dimensions.get("screen").height / 20,
+                    backgroundColor: this.categoryColor,
+                    borderRadius: 12,
+                    color: "white",
+                    fontFamily: "Gill Sans",
+                    fontSize: 20,
+                    overflow: "hidden",
+                    padding: 5,
+                    margin: 10,
+                    textAlign: "center",
+                  }}
+                >
+                  No
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -163,47 +212,32 @@ const practiceStyles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
-  activityButtons: {
-    elevation: 8,
-    backgroundColor: "white",
-    borderColor: "grey",
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    margin: 20,
-    height: Dimensions.get("screen").height / 18,
-  },
+
   heading: {
     alignSelf: "center",
     fontFamily: "Gill Sans",
-    color: "#52575D",
-    fontSize: 30,
-    padding: 10,
-  },
-  title: {
-    fontFamily: "Gill Sans",
     color: "#000",
-    textAlignVertical: "center",
-    fontSize: Dimensions.get("screen").height / 18 - 25,
+    fontSize: 30,
+    padding: 20,
   },
+
   text: {
     fontFamily: "Gill Sans",
     color: "#000",
     textAlign: "center",
     fontSize: 20,
-    margin: 20,
+    margin: 10,
   },
   decisions: {
-    height: Dimensions.get("screen").height / 20,
+    height: Dimensions.get("screen").height / 25,
     backgroundColor: "dodgerblue",
     borderRadius: 12,
     color: "white",
     fontFamily: "Gill Sans",
     fontSize: 20,
     overflow: "hidden",
-    padding: 10,
-    margin: 10,
+    padding: 5,
+    margin: 5,
     textAlign: "center",
   },
   grid: {
@@ -218,6 +252,6 @@ const practiceStyles = StyleSheet.create({
     width: Dimensions.get("screen").width / 1.15,
     height: Dimensions.get("screen").height / 10,
     borderWidth: 1,
-    borderColor: "dodgerblue",
+    borderColor: globalThis.categoryColor,
   },
 });

@@ -10,6 +10,9 @@ import {
   Image,
 } from "react-native";
 
+import * as fullData from "./Activities.json";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
 export var activities_array = [
   "Go on a walk!",
   "Learn a new skill!",
@@ -19,30 +22,65 @@ export var activities_array = [
 
 export class RandomActivityScreen extends Component {
   state = {
-    activity: "Generate a random activity by clicking the image!",
+    activity: "Click the button to generate a random activity!",
   };
 
   onPress = () => {
-    this.setState({
-      activity:
-        activities_array[
-          Math.floor(Math.random() * 100) % activities_array.length
-        ],
-    });
+    var randomCategoryNum = Math.floor(Math.random() * Math.floor(5));
+    var randomActivityNum;
+
+    if (randomCategoryNum == 0) {
+      randomActivityNum = Math.floor(
+        Math.random() * Math.floor(fullData.indoors.length)
+      );
+      this.setState({
+        activity: fullData.indoors[randomActivityNum].identifier,
+      });
+    } else if (randomCategoryNum == 1) {
+      randomActivityNum = Math.floor(
+        Math.random() * Math.floor(fullData.outdoors.length)
+      );
+      this.setState({
+        activity: fullData.outdoors[randomActivityNum].identifier,
+      });
+    } else if (randomCategoryNum == 2) {
+      randomActivityNum = Math.floor(
+        Math.random() * Math.floor(fullData.health.length)
+      );
+      this.setState({
+        activity: fullData.health[randomActivityNum].identifier,
+      });
+    } else if (randomCategoryNum == 3) {
+      randomActivityNum = Math.floor(
+        Math.random() * Math.floor(fullData.fun.length)
+      );
+      this.setState({
+        activity: fullData.fun[randomActivityNum].identifier,
+      });
+    } else if (randomCategoryNum == 4) {
+      randomActivityNum = Math.floor(
+        Math.random() * Math.floor(fullData.learning.length)
+      );
+      this.setState({
+        activity: fullData.learning[randomActivityNum].identifier,
+      });
+    }
   };
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <TouchableHighlight onPress={this.onPress}>
-          <Image
-            style={styles.gen_button}
-            source={{
-              uri: "https://picsum.photos/300",
-            }}
-          />
-        </TouchableHighlight>
+        <Image
+          style={styles.largeButton}
+          source={require("/Users/tessvandaele/Documents/summerhacks_team/App/assets/runningBeagle.png")}
+        />
         <Text style={styles.activities_disp}>{this.state.activity}</Text>
+        <TouchableOpacity onPress={this.onPress}>
+          <Image
+            style={styles.smallButton}
+            source={require("/Users/tessvandaele/Documents/summerhacks_team/App/assets/surpriseMe.png")}
+          />
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }
@@ -50,21 +88,29 @@ export class RandomActivityScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#fff",
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    alignContent: "center",
   },
-  gen_button: {
+  largeButton: {
     width: Dimensions.get("screen").width,
     height: Dimensions.get("screen").height / 2,
+    alignItems: "center",
+  },
+  smallButton: {
+    height: Dimensions.get("screen").height / 8,
+    width: Dimensions.get("screen").width / 1.2,
+    alignSelf: "center",
+    marginTop: Dimensions.get("screen").height / 10,
   },
   activities_disp: {
     textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 24,
-    backgroundColor: "orange",
-    marginLeft: Dimensions.get("screen").width / 4,
-    marginTop: Dimensions.get("screen").height / 4,
-    marginBottom: Dimensions.get("screen").height / 4,
-    width: Dimensions.get("screen").width / 2,
+    alignSelf: "center",
+    fontSize: 30,
+    fontFamily: "Gill Sans",
+    //backgroundColor: "#71bcf9",
+    width: Dimensions.get("screen").width / 1.1,
+    alignContent: "center",
   },
 });

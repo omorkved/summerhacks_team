@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import {
   SafeAreaView,
   Text,
@@ -12,6 +12,7 @@ import {
   Switch,
   View,
   Image,
+  TouchableOpacityBase,
 } from "react-native";
 
 import { Container, Header, Content, DatePicker } from "native-base";
@@ -20,6 +21,32 @@ import { Container, Header, Content, DatePicker } from "native-base";
 export default class SettingsScreen extends Component {
   //TO DO: When pressed, this should CHANGE INTERNAL SETTINGS
   //       so that certain features across the app are their favorite color
+  constructor() {
+    super();
+    this.myColorAlert = this.myColorAlert.bind(this);
+    this.colors = [
+      "#00BFFF",
+      "#FF1493",
+      "#00CED1",
+      "#228B22",
+      "#e1ad01",
+      "#FF4500",
+    ];
+
+    this.state = {
+      buttonOne: "Change User Name",
+      buttonFive: "Change Birth Date",
+      buttonTwo: "Change Favorite Color",
+      buttonThree: "Change Time Zone",
+      buttonFour: "Help",
+      username: "Name",
+      color: "yellowgreen",
+      //text: "",
+
+      //favColor: "yellowgreen",
+    };
+  }
+
   myColorAlert = () =>
     Alert.alert(
       "Change Favorite Color",
@@ -28,7 +55,10 @@ export default class SettingsScreen extends Component {
         {
           //TODO: change internal color var in onPress
           text: "Purple",
-          onPress: () => console.log("Purple pressed"),
+          onPress: () => {
+            this.color = "purple";
+            console.log(this.color);
+          },
         },
         {
           //TODO: change internal color var in onPress
@@ -49,12 +79,32 @@ export default class SettingsScreen extends Component {
       { cancelable: true }
     );
 
-  state = {
-    buttonOne: "Change User Name",
-    buttonFive: "Change Birth Date",
-    buttonTwo: "Change Favorite Color",
-    buttonThree: "Change Time Zone",
-    buttonFour: "Help",
+  renderColors = () => {
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+        }}
+      >
+        {this.colors.map((prop, key) => {
+          return (
+            <TouchableOpacity
+              onPress={() => {
+                this.setState({
+                  color: this.colors[key],
+                });
+              }}
+              key={key}
+              style={[settingsStyles.btnColor, { backgroundColor: prop }]}
+            ></TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  };
+
+  handleEmail = (text) => {
+    this.setState({ username: text });
   };
 
   render() {
@@ -66,7 +116,7 @@ export default class SettingsScreen extends Component {
       <SafeAreaView style={settingsStyles.container}>
         <View style={settingsStyles.profileImage}>
           <Image
-            source={require("./stockProfile.png")}
+            source={require("/Users/tessvandaele/Documents/summerhacks_team/App/assets/eatingBeagle.png")}
             style={settingsStyles.image}
             resizeMode="center"
           ></Image>
@@ -74,45 +124,88 @@ export default class SettingsScreen extends Component {
 
         <View style={settingsStyles.infoContainer}>
           <Text
-            style={[settingsStyles.text, { fontWeight: "200", fontSize: 36 }]}
+            style={{
+              color: this.state.color,
+              fontSize: 40,
+              fontFamily: "Gill Sans",
+            }}
           >
-            Julie
+            {this.state.username}
           </Text>
           <Text
-            style={[settingsStyles.text, { color: "#AEB5BC", fontSize: 14 }]}
+            style={[
+              settingsStyles.userText,
+              { color: "#AEB5BC", fontSize: 16 },
+            ]}
           >
-            @julielastname
+            @{this.state.username.toLowerCase()}
           </Text>
         </View>
 
-        <TouchableOpacity>
-          <Text style={settingsStyles.buttons}>{this.state.buttonOne}</Text>
-        </TouchableOpacity>
+        <Text style={settingsStyles.text}>Change Username Here:</Text>
+        <TextInput
+          style={{
+            margin: 15,
+            height: 40,
+            borderColor: this.state.color,
+            borderWidth: 1,
+            width: Dimensions.get("screen").width / 1.1,
+          }}
+          underlineColorAndroid="transparent"
+          placeholder="Type Here"
+          placeholderTextColor="grey"
+          autoCapitalize="none"
+          onChangeText={this.handleEmail}
+        />
+
+        {/* <TouchableOpacity>
+          <Text
+            style={{
+              height: Dimensions.get("screen").height / 18,
+              width: Dimensions.get("screen").width / 1.1,
+              backgroundColor: this.favColor,
+              borderRadius: 12,
+              color: "white",
+              fontFamily: font,
+              fontSize: 24,
+              overflow: "hidden",
+              margin: 5,
+              padding: 5,
+            }}
+          >
+            {this.state.buttonFive}
+          </Text>
+        </TouchableOpacity> */}
+        <Text style={settingsStyles.text}>Choose Your Favorite Color:</Text>
+        <View>{this.renderColors()}</View>
 
         <TouchableOpacity>
-          <Text style={settingsStyles.buttons}>{this.state.buttonFive}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Text style={settingsStyles.buttons} onPress={this.myColorAlert}>
+          <Text
+            style={{
+              height: Dimensions.get("screen").height / 18,
+              width: Dimensions.get("screen").width / 1.1,
+              backgroundColor: this.state.color,
+              borderRadius: 12,
+              color: "white",
+              fontFamily: font,
+              fontSize: 24,
+              overflow: "hidden",
+              margin: 5,
+              padding: 5,
+            }}
+            onPress={this.myColorAlert}
+          >
             {this.state.buttonTwo}
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
-          <Text style={settingsStyles.buttons}>{this.state.buttonThree}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={settingsStyles.buttons}>{this.state.buttonFour}</Text>
-        </TouchableOpacity>
-
-        <Switch
+        {/* <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={this.isEnabled ? "#f5dd4b" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={this.toggleSwitch}
           value={this.isEnabled}
-        />
+        /> */}
       </SafeAreaView>
       //TODO: Switch currently does nothing.
       // make toggleSwitch function
@@ -129,10 +222,30 @@ const settingsStyles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "space-evenly",
   },
-  text: {
+  textInput: {
+    height: 40,
+    //borderColor: this.state.color,
+    borderWidth: 1,
+  },
+  btnColor: {
+    height: 40,
+    width: 40,
+    borderRadius: 40,
+    marginHorizontal: 3,
+  },
+  userText: {
     fontWeight: "bold",
     fontFamily: font,
     color: "#52575D",
+    fontSize: 20,
+  },
+  text: {
+    fontWeight: "normal",
+    fontFamily: font,
+    color: "#52575D",
+    fontSize: 20,
+    alignSelf: "flex-start",
+    margin: 5,
   },
   infoContainer: {
     alignSelf: "center",
