@@ -15,7 +15,17 @@ import {
 } from "react-native";
 
 import { mainBeagle } from "../assets/mainBeagle.png";
-//import { signInWithEmail } from "../firebaseAuth.js";
+import { fauth } from "../firebase.config";
+global.userFirebaseId = "default";
+
+/* Grab the Firebase user uid */
+fauth.onAuthStateChanged((user) => {
+  if (user != null) {
+    console.log("Firebase account authenticated. ", user.uid);
+  }
+  global.userFirebaseId = user.uid;
+});
+
 export default function HomeScreen({ navigation }) {
     return (
     <SafeAreaView style={homeStyles.container}>

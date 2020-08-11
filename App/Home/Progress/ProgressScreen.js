@@ -10,33 +10,34 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import { fdb } from "../../firebase.config";
+import { fdb, fauth } from "../../firebase.config";
 import { userId } from "../../firebaseFunctions";
-
 //import console = require("console");
 
   /* Here is an example of how to listen to the database 
      The "userId + /todos" line is because that is how I stored
      the info in the firebase realtime database */
 var lenToDoList = 0;
-var ToDoListener = fdb.ref(userId + '/todos');
+var ToDoListener = fdb.ref(userFirebaseId + '/todos');
 
 // Below is the 'listener'. It runs whenever a change occurs to the databse
 ToDoListener.on('value', function(snapshot) {
-        updateLen(snapshot.val());
-        seeActivityIDs(snapshot.val());
-        // you could add other things here
-        console.log("Listener ran")
+        if(snapshot){
+          updateLen(snapshot.val());
+          seeActivityIDs(snapshot.val());
+          // you could add other things here
+          console.log("To-Do List Listener ran for user: ", userFirebaseId);
+        }
 });
 
 function updateLen (valFromDb) {
+  if (valFromDb) lenToDoList = Object.keys(valFromDb).length;
   /* The code below simply finds the length of the todolist,
      which is stored as a dictionary */
-  lenToDoList = Object.keys(valFromDb).length;
 };
 
 function seeActivityIDs(valFromDb) {
-  console.log(Object.keys(valFromDb))
+  if (valFromDb) console.log(Object.keys(valFromDb));
   // TO DO: Instead of just logging to console, this should be shown to user
 }
 
@@ -44,20 +45,25 @@ function seeActivityIDs(valFromDb) {
    Right now our db only tracks the one most recent, but perhaps
    we could store with timestamps so that we can grab the 5-10 most 
    recently added items, or whatever */
-var mostRecentlyAdded = null;
-var mostRecentListener = fdb.ref('users/' + userId + '/lastAdded');
+var mostRecentListener = fdb.ref('users/' + userFirebaseId + '/lastAdded');
 
 mostRecentListener.on('value', function(snapshot) {
-  console.log(snapshot.val());
+  if (snapshot) console.log(snapshot.val());
 });
+
+/* Listen for authentication */
 
 
 export default class ProgressScreen extends Component {
-
+  
   //TO DO: Let's make this scalable. There should be one general "to do" alert 
   // that can populate based on the TO DO LIST
   // and one general "you did ___ on ___" alert than can populate based on the
   // ACCOMPLISHMENT List
+
+
+  // TO DO: CHANGE DEMO BELOW into scrollable progress screen
+
   myDanceAlert = () =>
     Alert.alert(
       "To Do",

@@ -17,7 +17,7 @@ import {
 
 import * as fullData from "./Activities.json";
 import ActivityCell from "./ActivityCell";
-import { addTask, userId, removeTask } from "../../../firebaseFunctions";
+import { addTask, removeTask } from "../../../firebaseFunctions";
 
 function loggingType(someVar) {
   console.log(typeof someVar);
@@ -137,7 +137,7 @@ export default class Practice extends Component {
                   /* Sends Task to Firebase to record selection
                       But first checks if an activity with valid Id has been selected */
                   if (typeof this.itemId !== "undefined") {
-                    addTask(userId, this.itemId);
+                    addTask(userFirebaseId, this.itemId);
                   } else {
                     //this line below is just for debugging
                     console.log(this.dataFromJSON);
@@ -168,7 +168,7 @@ export default class Practice extends Component {
 
                   // "No" option: they reject the activity.
                   if (typeof this.itemId !== "undefined") {
-                    removeTask(userId, this.itemId);
+                    removeTask(userFirebaseId, this.itemId);
                   }
 
                   // TO DO: Do we want this to auto-select a new activity, instead?
