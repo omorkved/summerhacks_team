@@ -10,7 +10,8 @@ import {
 	ActivityIndicator,
 	TouchableWithoutFeedback,
   Keyboard,
-  Image
+  Image,
+  Dimensions
 	} from "react-native";
 import "firebase/firestore";
 import firebase from "firebase";
@@ -63,13 +64,18 @@ class AuthScreen extends React.Component {
       >
       <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <Text style={{ fontSize: 32, fontWeight: "700", color: "gray" }}>
-              App Name
-            </Text>
+      <Image
+          source={require("../assets/title.jpeg")}
+          style={{
+            width: Dimensions.get("screen").width,
+            height: Dimensions.get("screen").height / 6,
+            alignSelf: "center",
+          }}
+        />
       <View style={styles.form}>
               <TextInput
       style={styles.input}
-                placeholder="Email"
+                placeholder="Enter Email"
                 placeholderTextColor="#B1B1B1"
                 returnKeyType="next"
                 keyboardType="email-address"
@@ -79,7 +85,7 @@ class AuthScreen extends React.Component {
               />
               <TextInput
       style={styles.input}
-                placeholder="Password"
+                placeholder="Enter Password"
                 placeholderTextColor="#B1B1B1"
                 returnKeyType="done"
                 textContentType="newPassword"
@@ -99,11 +105,12 @@ class AuthScreen extends React.Component {
             >
 		{this.state.error}
             </Text>
-            <TouchableOpacity
-      style={{ width: '86%', marginTop: 10 }}
-      onPress={() => this.signInWithEmail()}>
-                  <Text>Sign In</Text>
-            </TouchableOpacity>
+            
+      <TouchableOpacity style={styles.button}
+        
+        onPress={() => this.signInWithEmail()}>
+        <Text>Sign In</Text>
+      </TouchableOpacity>
 
       <View style={{ marginTop: 10 }}>
               <Text
@@ -112,10 +119,20 @@ class AuthScreen extends React.Component {
 	      this.props.navigation.navigate("SignUp");
 	  }}
               >
-                Don't have an Account?
+                Don't have an Account? Click Here
               </Text>
             </View>
           </KeyboardAvoidingView>
+          <Image
+          source={require("../assets/mainImage.png")}
+          style={{
+            width: Dimensions.get("screen").width / 1.1,
+            height: Dimensions.get("screen").height / 3,
+            alignSelf: "center",
+            marginTop: 0,
+            marginBottom: 40,
+          }}
+        />
         </SafeAreaView>
       </TouchableWithoutFeedback>
     );
@@ -129,7 +146,7 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "86%",
-    marginTop: 15
+    marginTop: 5
   },
   logo: {
     marginTop: 20
@@ -142,23 +159,13 @@ const styles = StyleSheet.create({
     marginTop: 25.5
   },
   button: {
-    backgroundColor: "#3A559F",
+    backgroundColor: "#ffd699",
     height: 44,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 22
+    width: Dimensions.get("screen").width / 4,
   },
-  googleButton: {
-    backgroundColor: "#FFFFFF",
-    height: 44,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 22,
-    borderWidth: 1,
-    borderColor: "#707070"
-  }
 });
 
 export default AuthScreen;

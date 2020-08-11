@@ -64,16 +64,14 @@ class SignUpScreen extends React.Component {
       >
         {/* </TouchableWithoutFeedback><SafeAreaView style={{ flex: 1 }}> */}
         {/* </SafeAreaView><KeyboardAvoidingView style={styles.container} behavior="padding"> */}
-      <SafeAreaView>
-      <KeyboardAvoidingView style={homeStyles.container}>
+      <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Image
           source={require("../assets/title.jpeg")}
           style={{
             width: Dimensions.get("screen").width,
             height: Dimensions.get("screen").height / 6,
             alignSelf: "center",
-            marginTop: 10,
-            //marginBottom: 10,
           }}
         />
           <View style={styles.form}>
@@ -118,12 +116,10 @@ class SignUpScreen extends React.Component {
             >
               {this.state.error}
             </Text>
-            <Button
-              style={{ width: '50%', marginTop: 10, alignSelf: 'center' }}
-              title="Click to Sign Up"
-              onPress={() => this.signInWithEmail()}
-              color="#841584"
-            />
+            <TouchableOpacity style={styles.button}
+              onPress={() => this.signInWithEmail()}>
+            <Text> Sign Up </Text>
+            </TouchableOpacity>
             {/*    <Text>Sign Up</Text> */}
             <View style={{ marginTop: 10 }}>
               <Text
@@ -143,7 +139,6 @@ class SignUpScreen extends React.Component {
             height: Dimensions.get("screen").height / 3,
             alignSelf: "center",
             marginTop: 0,
-            marginBottom: 40,
           }}
         />
         </SafeAreaView>
@@ -159,10 +154,6 @@ const styles = StyleSheet.create({
   },
   form: {
     width: '86%',
-    marginTop: 15
-  },
-  logo: {
-    marginTop: 20
   },
   input: {
     fontSize: 20,
@@ -172,12 +163,12 @@ const styles = StyleSheet.create({
     marginTop: 25.5,
   },
   button: {
-    backgroundColor: '#3A559F',
+    backgroundColor: "#ffd699",
     height: 44,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 22
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: Dimensions.get("screen").width / 4,
   },
 });
 export default SignUpScreen;
