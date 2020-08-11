@@ -9,10 +9,12 @@ import HomeScreen from "./Home/HomeScreen";
 import SettingsScreen from "./Home/Settings/SettingsScreen";
 import CategoriesScreen from "./Home/Categories/IndividualCategories/CategoriesScreen";
 import ProgressScreen from "./Home/Progress/ProgressScreen";
+import AuthScreen from "./Home/AuthScreen";
 
 //import IndoorsScreen from "./Home/Categories/IndividualCategories/IndoorsScreen";
 import IndividualScreensTemplate from "./Home/Categories/IndividualCategories/IndividualScreensTemplate";
 import { RandomActivityScreen } from "./Home/Categories/IndividualCategories/RandomActivityScreen";
+import SignUpScreen from "./Home/AuthScreenSignUp";
 
 /* NAVIGATION */
 const Stack = createStackNavigator();
@@ -22,7 +24,17 @@ function App() {
     <NavigationContainer>
       {/* Section A: Home Screen page's stack screens
         ONLY add stack screens reachable directly from home page in Section A. */}
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Auth">
+        <Stack.Screen
+          name="Auth"
+          component={AuthScreen}
+          options={{ title:"Welcome!" }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpScreen}
+          options={{ title:"Sign Up!" }}
+        />
         <Stack.Screen
           name="Home"
           component={HomeScreen}

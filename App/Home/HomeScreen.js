@@ -11,12 +11,13 @@ import {
   Dimensions,
   StatusBar,
   TouchableOpacity,
+  TextInput
 } from "react-native";
 
 import { mainBeagle } from "../assets/mainBeagle.png";
-
+//import { signInWithEmail } from "../firebaseAuth.js";
 export default function HomeScreen({ navigation }) {
-  return (
+    return (
     <SafeAreaView style={homeStyles.container}>
       <View>
         <Image
@@ -67,7 +68,7 @@ export default function HomeScreen({ navigation }) {
 
 const font = "Gill Sans";
 
-const homeStyles = StyleSheet.create({
+export const homeStyles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     alignItems: "center",
