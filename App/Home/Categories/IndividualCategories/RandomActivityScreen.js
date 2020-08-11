@@ -72,13 +72,13 @@ export class RandomActivityScreen extends Component {
       <SafeAreaView style={styles.container}>
         <Image
           style={styles.largeButton}
-          source={require("/Users/tessvandaele/Documents/summerhacks_team/App/assets/runningBeagle.png")}
+          source={require("../../../assets/runningBeagle.png")}
         />
         <Text style={styles.activities_disp}>{this.state.activity}</Text>
         <TouchableOpacity onPress={this.onPress}>
           <Image
             style={styles.smallButton}
-            source={require("/Users/tessvandaele/Documents/summerhacks_team/App/assets/surpriseMe.png")}
+            source={require("../../../assets/surpriseMe.png")}
           />
         </TouchableOpacity>
       </SafeAreaView>

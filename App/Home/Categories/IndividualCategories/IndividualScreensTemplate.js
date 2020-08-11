@@ -127,7 +127,7 @@ export default class Practice extends Component {
                   alignSelf: "center",
                   margin: 20,
                 }}
-                source={require("/Users/tessvandaele/Documents/summerhacks_team/App/assets/medal.png")}
+                source={require("../../../assets/medal.png")}
               ></Image>
               <Text style={practiceStyles.text}>{this.itemDescription}</Text>
               <TouchableOpacity
