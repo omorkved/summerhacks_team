@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef, useState} from "react";
 
 import {
   View,
@@ -11,16 +11,44 @@ import {
   Dimensions,
   StatusBar,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
+
+import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
+//import * as firebase from 'firebase';
 
 import { mainBeagle } from "../assets/mainBeagle.png";
 // Reference: https://firebase.google.com/docs/auth/web/firebaseui
-import { authConfig, authUI} from "../firebaseAuth.js";
-
-authUI.start('#firebaseui-auth-container', authConfig);
+//import { phoneProvider } from "../firebaseAuth.js";
+import firebase, { firebaseConfig, fauth, authauth} from "../firebase.config.js";
+//authUI.start('#firebaseui-auth-container', authConfig);
 
 export default function HomeScreen({ navigation }) {
-    authUI.start('#firebaseui-auth-container', authConfig);
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [codeSentToPhone, setCode] = useState('');
+    const [verificationId, setVerificationId] = useState(null);
+    const recaptchaVerifier = useRef(null);
+    const sendVerification = () => { 
+	const phoneProvider = new authauth.PhoneAuthProvider();
+	console.log("Sending verification to phone", phoneNumber);
+	try {
+	    phoneProvider.verifyPhoneNumber(phoneNumber, recaptchaVerifier.current).then(setVerificationId);
+	} catch (err) {
+	    console.log("PHONE VERIFICATION ERR:");
+	    console.log(err);
+	} 
+	console.log("Verification sent. Verification ID is:");
+	// obviously delete after debug
+	console.log(verificationId);
+};
+    const confirmCode = () => {
+	console.log("Confirming code...");
+	const credential = authauth.PhoneAuthProvider.credential(verificationId, codeSentToPhone);
+	fauth.signInWithCredential(credential).then((result) => {
+		// Do something with the results here
+		console.log(result);
+	    });
+};
   return (
     <SafeAreaView style={homeStyles.container}>
       <View>
@@ -34,28 +62,46 @@ export default function HomeScreen({ navigation }) {
             //marginBottom: 10,
           }}
         />
-    <div id="firebaseui-auth-container"
-    style={{                                                                                                
-                  alignSelf: "center",                                                                        
-	      }}></div>
-        <Image
-          source={require("../assets/mainImage.png")}
-          style={{
-            width: Dimensions.get("screen").width / 1.1,
-            height: Dimensions.get("screen").height / 3,
-            alignSelf: "center",
-            marginTop: 0,
-            marginBottom: 40,
-          }}
-        />
+	  { /*<div id="firebaseui-auth-container" style={{ alignSelf: "center" }}></div>*/}
 
+    <View style={{ alignSelf: "center", }} >
+    <FirebaseRecaptchaVerifierModal style={{ alignSelf: "center", }}
+    ref={ recaptchaVerifier }
+    firebaseConfig={ firebaseConfig } />
+    <TextInput style={{ alignSelf: "center", }}
+      placeholder="Enter Phone Number:"
+    onChangeText={setPhoneNumber}
+      keyboardType="phone-pad"
+      autoCompleteType="tel"
+    />
+    <TouchableOpacity style={{ alignSelf: "center", }} onPress={sendVerification}>
+      <Text>Send Verification</Text>
+    </TouchableOpacity>
+    <TextInput style={{ alignSelf: "center", }}
+      placeholder="Confirmation Code"
+    onChangeText={setCode}
+      keyboardType="number-pad"
+    />
+    <TouchableOpacity onPress={confirmCode} style={{ alignSelf: "center", }}>
+      <Text>Confirm Verification Code</Text>
+    </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Categories")}>
           <Image
             source={require("../assets/getStarted.jpeg")}
             style={homeStyles.buttons}
           ></Image>
         </TouchableOpacity>
-
+    </View>
+<Image
+    source={require("../assets/mainImage.png")}
+    style={{
+            width: Dimensions.get("screen").width / 1.1,
+            height: Dimensions.get("screen").height / 3,
+            alignSelf: "center",
+            marginTop: 0,
+            marginBottom: 40,
+	}}
+        />
         <TouchableOpacity onPress={() => navigation.navigate("Progress")}>
           <Image
             source={require("../assets/Progress.jpeg")}
