@@ -37,8 +37,7 @@ export default class Practice extends Component {
     this.activityType = props.route.params.activityType;
     this.categoryColor;
 
-    /* This tells the screen which data to populate with
-       TO DO: update this to include all possible options */
+    /* This tells the screen which data to use to populate the screen */
     if (this.activityType == "indoors") {
       this.dataFromJSON = fullData.indoors;
       this.categoryColor = "dodgerblue";
@@ -56,9 +55,7 @@ export default class Practice extends Component {
       this.categoryColor = "sandybrown";
     }
   }
-  // TO DO: Activities that the user has already added should not show up, right?
-  /* TO DO: Right now, "Yes" adds to a to-do list. We should then navigate to a second set
-            of choices that says "do now" or "do later", yeah? */
+  // Future work: Activities that the user has already added should not show up
   render(props) {
     return (
       <SafeAreaView style={practiceStyles.container}>
@@ -134,7 +131,7 @@ export default class Practice extends Component {
                   /* Sends Task to Firebase to record selection
                       But first checks if an activity with valid Id has been selected */
                   if (typeof this.itemId !== "undefined") {
-                    addTask(userFirebaseId, this.itemId, this.itemName);
+                    addTask(userFirebaseId, this.itemId, this.itemName, this.itemDescription);
                   } else {
                     //this line below is just for debugging
                     console.log(this.dataFromJSON);

@@ -3,19 +3,16 @@ import * as firebase from 'firebase';
 // Access to firebase database is initialized in config file (secret)
 import { fdb } from './firebase.config.js';
 
-// Recall that userFirebaseId is a global variable set during Sign in or Sign up
-//export const userId = "test3";
+// Recall that userFirebaseId is set during Sign in or Sign up
 
-export function addTask(userFirebaseId, activityId, activityName) {
-	// "set" writes new data
-	
+export function addTask(userFirebaseId, activityId, activityName, activityDesc) {
+	// Record "most recently added" activity
 	if (userFirebaseId){
   	fdb.ref('users/' + userFirebaseId).set({
     	lastAdded: activityId
   	}, function(error) {
 	  if (error) {
 	  	console.log("ERR: Unable to store in database");
-	  // Do something here so that app continues to function
       	} else {
 	  console.log("SUCCESS: Stored most recently added in Busy Beagle databse");
 	  }}
@@ -23,8 +20,7 @@ export function addTask(userFirebaseId, activityId, activityName) {
 
   	fdb.ref(userFirebaseId + '/todos').update({
 	  // The brackets tell Firebase to treat activityId as a variable
-	  [activityId] : {
-		  	"Name" : activityName},
+	  [activityId] : [activityName, activityDesc],
 	      },
       function(error) {
 	  if (error) {
@@ -37,8 +33,7 @@ export function addTask(userFirebaseId, activityId, activityName) {
 	} else {
 		console.log("ERR: Authenticaton did not work. userFirebaseId is null");
 	}
-
-  console.log("Great, the firebase function ran for user: ", userFirebaseId);
+  console.log("Firebase function addTask ran for user: ", userFirebaseId);
   return
 };
 
@@ -74,8 +69,36 @@ export function removeTask(userFirebaseId, activityId){
 		console.log("ERR: Authenticaton did not work. userFirebaseId is null");
 	}
 
+	// Change global activityArry so that visuals reflect updated database
+	fdb.ref(userFirebaseId + '/todos').once('value').then(function(snapshot){
+		if (snapshot.val()) global.activityArray = Object.entries(snapshot.val())
+	  });
+
 	return;
 }
 
+export function achieveTask(userFirebaseId, activityId, activityName, activityDesc) {
+  	fdb.ref(userFirebaseId + '/achieved').update({
+	  [activityId] : [activityName, activityDesc],
+	      },
+      function(error) {
+	  if (error) {
+	      console.log("ERR: Unable to store in database");
+      } else {
+	  console.log("SUCCESS: Appended to achivement list in Busy Beagle database");
+	  }}
+	);
+
+	/* One the user achieves a task, it will no longer appear in 
+		the "To-Do" section due to call to removeTask */
+	removeTask(userFirebaseId, activityId);
+
+	fdb.ref(userFirebaseId + '/achieved').once('value').then(function(snapshot){
+		if (snapshot.val()) global.achievedArray = Object.entries(snapshot.val())
+	  });
+
+  console.log("Firebase function achieveTask ran for user: ", userFirebaseId);
+  return
+};
 
 

@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   StyleSheet,
   Dimensions,
@@ -8,48 +8,44 @@ import {
   TouchableOpacity,
   Image,
   Alert,
-  ScrollView,
   FlatList,
   SafeAreaView,
+  Modal,
 } from "react-native";
 import { fdb, fauth } from "../../firebase.config";
-import ActivityCell from "../Categories/IndividualCategories/ActivityCell";
+import { achieveTask, removeTask } from "../../firebaseFunctions";
 
-//import console = require("console");
-
-  /* Here is an example of how to listen to the database 
-     The "userId + /todos" line is because that is how I stored
-     the info in the firebase realtime database */
+/* Here is an example of how to listen to the database 
+  The "userId + /todos" line is because that is how we store
+  the info in the firebase realtime database */
 var lenToDoList = 0;
 var ToDoListener = fdb.ref(userFirebaseId + '/todos');
+var AchievedListener = fdb.ref(userFirebaseId + '/achieved');
 
-// Below is the 'listener'. It runs whenever a change occurs to the databse
+// The listener runs whenever a change occurs to the databse
 ToDoListener.on('value', function(snapshot) {
         if(snapshot){
           updateLen(snapshot.val());
           seeActivityIDs(snapshot.val());
-          // you could add other things here
           console.log("To-Do List Listener ran for user: ", userFirebaseId, " in ProgressScreen.js");
         }
 });
 
+AchievedListener.on('value', function(snapshot) {
+  if(snapshot.val()) global.achievedArray = Object.entries(snapshot.val());
+});
+
 function updateLen (valFromDb) {
+  // Finds length of ToDo list
   if (valFromDb) lenToDoList = Object.keys(valFromDb).length;
-  /* The code below simply finds the length of the todolist,
-     which is stored as a dictionary */
 };
 
 function seeActivityIDs(valFromDb) {
   if (valFromDb){
-    //console.log(Object.keys(valFromDb));
-    //console.log("value: ", valFromDb);
-    console.log("value: ", Object.entries(valFromDb));
-    //global.activityArray = Object.keys(valFromDb);
     global.activityArray = Object.entries(valFromDb);
   } else {
     console.log("ERR: seeActivityIDs: Unable to see activity IDs from Firebase in ProgressScreen.js. Length list is", valFromDb);
   }
-  // TO DO: Instead of just logging to console, this should be shown to user
 }
 
 /* Here is another example for the most recently added.
@@ -62,17 +58,23 @@ mostRecentListener.on('value', function(snapshot) {
 });
 
 function OurToDoList(){
+  const [modalVisible, setModalVisible] = useState(false);
+  const [actName, setActName] = useState("Activity");
+  const [actDesc, setActDesc] = useState("Desc");
+  const [actId, setActId] = useState("00");
+
   try{
     const checkIfExists = activityArray
     return (
+      <>
       <FlatList
-        data={activityArray }
-        keyExtractor={(item) => item.toString()}
+        data={ activityArray }
+        keyExtractor={(item) => item}
         renderItem={({ item }) => (
             <TouchableOpacity
               style={{
                 backgroundColor: "#fff",
-                margin: 10,
+                margin: 5,
                 flex: 1,
                 flexDirection: "column",
                 alignSelf: "center",
@@ -80,15 +82,77 @@ function OurToDoList(){
                 width: Dimensions.get("screen").width / 1.15,
                 height: Dimensions.get("screen").height / 10,
                 borderWidth: 2,
-              }}  > 
+              }}
+              onPress={() => {
+                setActName(item[1][0]);
+                setActDesc(item[1][1]);
+                setActId(item[0]);
+                setModalVisible(true);
+              }}
+              > 
               <View>
-                <Text style={ProgressStyles.activityText}>{item.toString().substring(3,)}</Text>
+                {/*<Text style={ProgressStyles.activityText}>{item.toString().substring(3,)}</Text>*/}
+                <Text style={ProgressStyles.activityText}>{item[1][0]}</Text>
                 </View>
             </TouchableOpacity>
         )}
         numColumns={1}
-        
         ></FlatList>
+      <Modal transparent={true} visible={modalVisible}>
+        <View
+          style={{
+            backgroundColor: "#000000aa",
+            flex: 1,
+            paddingHorizontal: 10,
+            paddingVertical: Dimensions.get("screen").height / 15,
+          }}>
+          <View
+          style={{
+              backgroundColor: "#ffffff",
+              margin: 10,
+              padding: 0,
+              borderRadius: 10,
+              flex: 1,
+            }}>
+              {/* The Details Box below the list: */}
+              <Text style={ProgressStyles.heading}>{actName}</Text>
+              <Image
+                style={{
+                  height: Dimensions.get("screen").height / 4.5,
+                  width: Dimensions.get("screen").width / 2,
+                  alignSelf: "center",
+                  margin: 20,
+                }}
+                source={require("../../assets/medal.png")}
+              ></Image>
+              <Text style={ProgressStyles.text}>{actDesc}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  achieveTask(userFirebaseId, actId, actName, actDesc);
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={ProgressStyles.yesOrNoText}>Complete Now</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={ProgressStyles.yesOrNoText}>Save for Later</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(false);
+                  removeTask(userFirebaseId, actId);
+                }}
+              >
+                <Text style={ProgressStyles.yesOrNoText}>Remove from To-Do list</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+        </>
     );
   } catch {
     return (
@@ -102,7 +166,7 @@ function OurAchievedList(){
     const checkIfExists = achievedArray
     return (
       <FlatList
-        data={activityArray }
+        data={ achievedArray }
         keyExtractor={(item) => item.toString()}
         renderItem={({ item }) => (
             <TouchableOpacity
@@ -114,21 +178,20 @@ function OurAchievedList(){
                 alignSelf: "center",
                 alignItems: "center",
                 width: Dimensions.get("screen").width / 1.15,
-                height: Dimensions.get("screen").height / 15,
+                height: Dimensions.get("screen").height / 12,
                 borderWidth: 2,
               }}  > 
               <View>
-                <Text style={ProgressStyles.activityText}>{item.toString().substring(3,)}</Text>
+                <Text style={ProgressStyles.activityText}>{item[1][0]}</Text>
                 </View>
             </TouchableOpacity>
         )}
         numColumns={1}
-        
         ></FlatList>
     );
   } catch {
     return (
-      <Text>The Achieved list cannot be loaded right now</Text>
+      <Text style={ProgressStyles.yesOrNoText}>The Achieved list cannot be loaded right now</Text>
     );
   }
 }
@@ -187,5 +250,24 @@ const ProgressStyles = StyleSheet.create({
     alignSelf: "center",
     textAlign: "center",
     textAlignVertical: "center",
+  },
+  yesOrNoText: {
+    height: Dimensions.get("screen").height / 20,
+    borderRadius: 12,
+    color: "white",
+    fontFamily: "Gill Sans",
+    fontSize: 20,
+    overflow: "hidden",
+    padding: 5,
+    margin: 10,
+    textAlign: "center",
+    backgroundColor: "yellowgreen",
+  },
+  heading: {
+    alignSelf: "center",
+    fontFamily: "Gill Sans",
+    color: "#000",
+    fontSize: 30,
+    padding: 20,
   },
 });
