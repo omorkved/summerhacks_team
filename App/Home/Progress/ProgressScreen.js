@@ -67,6 +67,7 @@ function OurToDoList(){
     const checkIfExists = activityArray
     return (
       <>
+      <View style={{ height: Dimensions.get("screen").height / 3 }}>
       <FlatList
         data={ activityArray }
         keyExtractor={(item) => item}
@@ -97,7 +98,8 @@ function OurToDoList(){
             </TouchableOpacity>
         )}
         numColumns={1}
-        ></FlatList>
+        ></FlatList> 
+        </View>
       <Modal transparent={true} visible={modalVisible}>
         <View
           style={{
@@ -153,6 +155,7 @@ function OurToDoList(){
           </View>
         </Modal>
         <Text style={ProgressStyles.titleText}>Achieved</Text>
+      <View style={{ height: Dimensions.get("screen").height / 3 }}>
       <FlatList
         data={ achievedArray }
         keyExtractor={(item) => item.toString()}
@@ -176,6 +179,7 @@ function OurToDoList(){
         )}
         numColumns={1}
         ></FlatList>
+        </View>
         </>
     );
     } catch {
