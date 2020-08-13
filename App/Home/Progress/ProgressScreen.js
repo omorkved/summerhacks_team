@@ -9,9 +9,12 @@ import {
   Image,
   Alert,
   ScrollView,
+  FlatList,
+  SafeAreaView,
 } from "react-native";
 import { fdb, fauth } from "../../firebase.config";
-import { userId } from "../../firebaseFunctions";
+import ActivityCell from "../Categories/IndividualCategories/ActivityCell";
+
 //import console = require("console");
 
   /* Here is an example of how to listen to the database 
@@ -26,7 +29,7 @@ ToDoListener.on('value', function(snapshot) {
           updateLen(snapshot.val());
           seeActivityIDs(snapshot.val());
           // you could add other things here
-          console.log("To-Do List Listener ran for user: ", userFirebaseId);
+          console.log("To-Do List Listener ran for user: ", userFirebaseId, " in ProgressScreen.js");
         }
 });
 
@@ -37,7 +40,15 @@ function updateLen (valFromDb) {
 };
 
 function seeActivityIDs(valFromDb) {
-  if (valFromDb) console.log(Object.keys(valFromDb));
+  if (valFromDb){
+    //console.log(Object.keys(valFromDb));
+    //console.log("value: ", valFromDb);
+    console.log("value: ", Object.entries(valFromDb));
+    //global.activityArray = Object.keys(valFromDb);
+    global.activityArray = Object.entries(valFromDb);
+  } else {
+    console.log("ERR: seeActivityIDs: Unable to see activity IDs from Firebase in ProgressScreen.js. Length list is", valFromDb);
+  }
   // TO DO: Instead of just logging to console, this should be shown to user
 }
 
@@ -46,139 +57,101 @@ function seeActivityIDs(valFromDb) {
    we could store with timestamps so that we can grab the 5-10 most 
    recently added items, or whatever */
 var mostRecentListener = fdb.ref('users/' + userFirebaseId + '/lastAdded');
-
 mostRecentListener.on('value', function(snapshot) {
-  if (snapshot) console.log(snapshot.val());
+  if (snapshot) console.log("Most Recently Added Activity: ", snapshot.val());
 });
 
-/* Listen for authentication */
+function OurToDoList(){
+  try{
+    const checkIfExists = activityArray
+    return (
+      <FlatList
+        data={activityArray }
+        keyExtractor={(item) => item.toString()}
+        renderItem={({ item }) => (
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#fff",
+                margin: 10,
+                flex: 1,
+                flexDirection: "column",
+                alignSelf: "center",
+                alignItems: "center",
+                width: Dimensions.get("screen").width / 1.15,
+                height: Dimensions.get("screen").height / 10,
+                borderWidth: 2,
+              }}  > 
+              <View>
+                <Text style={ProgressStyles.activityText}>{item.toString().substring(3,)}</Text>
+                </View>
+            </TouchableOpacity>
+        )}
+        numColumns={1}
+        
+        ></FlatList>
+    );
+  } catch {
+    return (
+      <Text>The To-Do list cannot be loaded right now</Text>
+    );
+  }
+}
 
+function OurAchievedList(){
+  try{
+    const checkIfExists = achievedArray
+    return (
+      <FlatList
+        data={activityArray }
+        keyExtractor={(item) => item.toString()}
+        renderItem={({ item }) => (
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#fff",
+                margin: 10,
+                flex: 1,
+                flexDirection: "column",
+                alignSelf: "center",
+                alignItems: "center",
+                width: Dimensions.get("screen").width / 1.15,
+                height: Dimensions.get("screen").height / 15,
+                borderWidth: 2,
+              }}  > 
+              <View>
+                <Text style={ProgressStyles.activityText}>{item.toString().substring(3,)}</Text>
+                </View>
+            </TouchableOpacity>
+        )}
+        numColumns={1}
+        
+        ></FlatList>
+    );
+  } catch {
+    return (
+      <Text>The Achieved list cannot be loaded right now</Text>
+    );
+  }
+}
 
 export default class ProgressScreen extends Component {
-  
-  //TO DO: Let's make this scalable. There should be one general "to do" alert 
-  // that can populate based on the TO DO LIST
-  // and one general "you did ___ on ___" alert than can populate based on the
-  // ACCOMPLISHMENT List
-
-
-  // TO DO: CHANGE DEMO BELOW into scrollable progress screen
-
   myDanceAlert = () =>
     Alert.alert(
       "To Do",
       "Challenge Accepted on DATE: Dance to your favorite song.",
       [{ text: "Finished!" }, { text: "Working on it!" }, { text: "Give up!" }]
     );
-
-  myKaraokeAlert = () =>
-    Alert.alert(
-      "To Do",
-      "Challenge Accepted on DATE: Sing the lyrics to your favorite song.",
-      [{ text: "Finished!" }, { text: "Working on it!" }, { text: "Give up!" }]
-    );
-
-  myRunningAlert = () =>
-    Alert.alert("Congratulations!", "You ran for 10 minutes on DATE.", [
-      { text: "Yay!" },
-    ]);
-
-  myJumpRopeAlert = () =>
-    Alert.alert("Congratulations!", "You jump roped for 10 minutes on DATE.", [
-      { text: "Yay!" },
-    ]);
-
-  render() {
+  render(props) {
     return (
-      <ScrollView style={ProgressStyles.container}>
+      <SafeAreaView style={ProgressStyles.container}>
         { /* Here is an example of how to use the listener */ }
-        <Text>You have { lenToDoList } tasks in your to-do list!</Text>
-
-        <Text style={ProgressStyles.text}>To Do</Text>
-        <TouchableOpacity style={{ flexDirection: "row" }}>
-          <Image
-            style={ProgressStyles.left_image}
-            source={{
-              uri: "https://media.giphy.com/media/241LfGhONZv5EWosVV/giphy.gif",
-            }}
-          ></Image>
-
-          <Image
-            style={ProgressStyles.right_image}
-            source={{
-              uri: "https://media.giphy.com/media/uLKUuSJR0cbLO/giphy.gif",
-            }}
-          ></Image>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={{ flexDirection: "row" }}>
-          <TouchableOpacity style={ProgressStyles.button_one}>
-            <Text onPress={this.myDanceAlert}>Dance</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={ProgressStyles.button_two}>
-            <Text onPress={this.myKaraokeAlert}>Karaoke</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-
-        <View style={{ flexDirection: "row" }}>
-          <Image
-            style={ProgressStyles.left_image}
-            source={{
-              uri: "https://media.giphy.com/media/241LfGhONZv5EWosVV/giphy.gif",
-            }}
-          ></Image>
-
-          <Image
-            style={ProgressStyles.right_image}
-            source={{
-              uri: "https://media.giphy.com/media/uLKUuSJR0cbLO/giphy.gif",
-            }}
-          ></Image>
-        </View>
-
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity style={ProgressStyles.button_one}>
-            <Text onPress={this.myDanceAlert}>Dance</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={ProgressStyles.button_two}>
-            <Text onPress={this.myKaraokeAlert}>Karaoke</Text>
-          </TouchableOpacity>
-        </View>
-
-        <Text style={ProgressStyles.text}>Achievements</Text>
-
-        <TouchableOpacity style={{ flexDirection: "row" }}>
-          <Image
-            style={ProgressStyles.left_image}
-            source={require("./running.png")}
-          ></Image>
-
-          <Image
-            style={ProgressStyles.right_image}
-            source={{
-              uri:
-                "https://media1.tenor.com/images/3bb1bad99d5521621792b16597cdfebd/tenor.gif?itemid=11769652",
-            }}
-          ></Image>
-        </TouchableOpacity>
-
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity style={ProgressStyles.button_one}>
-            <Text onPress={this.myRunningAlert}>What'd I do?</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={ProgressStyles.button_two}>
-            <Text onPress={this.myJumpRopeAlert}>What'd I do?</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    );
-  }
+        <Text style={ProgressStyles.banner}>You have { lenToDoList } tasks in your to-do list!</Text>
+        <Text style={ProgressStyles.titleText}>To Do</Text>
+        <OurToDoList/>
+        <Text style={ProgressStyles.titleText}>Achieved</Text>
+        <OurAchievedList/>
+        </SafeAreaView>
+    );}
 }
-
-// const font = "Gill Sans";
 
 const ProgressStyles = StyleSheet.create({
   container: {
@@ -186,54 +159,33 @@ const ProgressStyles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 
-  text: {
+  titleText: {
     fontWeight: "bold",
-    // fontFamily: font,
     color: "#52575D",
     fontWeight: "200",
     fontSize: 32,
     marginLeft: Dimensions.get("screen").width / 25,
     marginTop: Dimensions.get("screen").height / 100,
   },
-
-  left_image: {
-    width: Dimensions.get("screen").width / 2,
-    height: Dimensions.get("screen").height / 4,
+  activityText: {
+    fontWeight: "bold",
+    color: "#52575D",
+    fontWeight: "300",
+    fontSize: 22,
+    
   },
 
-  right_image: {
-    position: "absolute",
-    width: Dimensions.get("screen").width / 2,
-    height: Dimensions.get("screen").height / 4,
-    left: Dimensions.get("screen").width / 2,
-  },
-
-  button_one: {
+  banner: {
     height: Dimensions.get("screen").height / 18,
-    width: Dimensions.get("screen").width / 2.5,
-    marginTop: 10,
-    marginLeft: 20,
+    width: Dimensions.get("screen").width,
     borderRadius: 12,
-    fontSize: 24,
+    fontSize: 20,
     backgroundColor: "yellowgreen",
     color: "white",
-    // fontFamily: font,
     justifyContent: "center",
     alignItems: "center",
-  },
-
-  button_two: {
-    height: Dimensions.get("screen").height / 18,
-    width: Dimensions.get("screen").width / 2.5,
-    marginTop: 10,
-    marginLeft: Dimensions.get("screen").width / 12,
-    marginBottom: 10,
-    borderRadius: 12,
-    fontSize: 24,
-    backgroundColor: "yellowgreen",
-    color: "white",
-    // fontFamily: font,
-    justifyContent: "center",
-    alignItems: "center",
+    alignSelf: "center",
+    textAlign: "center",
+    textAlignVertical: "center",
   },
 });

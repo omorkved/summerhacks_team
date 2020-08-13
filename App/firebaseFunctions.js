@@ -6,7 +6,7 @@ import { fdb } from './firebase.config.js';
 // Recall that userFirebaseId is a global variable set during Sign in or Sign up
 //export const userId = "test3";
 
-export function addTask(userFirebaseId, activityId) {
+export function addTask(userFirebaseId, activityId, activityName) {
 	// "set" writes new data
 	
 	if (userFirebaseId){
@@ -23,7 +23,8 @@ export function addTask(userFirebaseId, activityId) {
 
   	fdb.ref(userFirebaseId + '/todos').update({
 	  // The brackets tell Firebase to treat activityId as a variable
-	  [activityId] : "True",
+	  [activityId] : {
+		  	"Name" : activityName},
 	      },
       function(error) {
 	  if (error) {

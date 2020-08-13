@@ -63,7 +63,6 @@ export default class Practice extends Component {
     return (
       <SafeAreaView style={practiceStyles.container}>
         <FlatList
-          //data={fullData.indoors}
           data={this.dataFromJSON}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -82,8 +81,6 @@ export default class Practice extends Component {
               // Only one activity will be selected at a time, so set its metadata as this values
               onPress={() => {
                 this.setState({ show: true });
-                // TO DO: Let's change this to not use this vars at some pt -- to avoid
-                //        accidental conflicts between variable names
                 this.itemName = item.identifier;
                 this.itemDescription = item.description;
                 this.itemId = item.id;
@@ -137,7 +134,7 @@ export default class Practice extends Component {
                   /* Sends Task to Firebase to record selection
                       But first checks if an activity with valid Id has been selected */
                   if (typeof this.itemId !== "undefined") {
-                    addTask(userFirebaseId, this.itemId);
+                    addTask(userFirebaseId, this.itemId, this.itemName);
                   } else {
                     //this line below is just for debugging
                     console.log(this.dataFromJSON);
