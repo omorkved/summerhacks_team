@@ -152,19 +152,7 @@ function OurToDoList(){
             </View>
           </View>
         </Modal>
-        </>
-    );
-  } catch {
-    return (
-      <Text>The To-Do list cannot be loaded right now</Text>
-    );
-  }
-}
-
-function OurAchievedList(){
-  try{
-    const checkIfExists = achievedArray
-    return (
+        <Text style={ProgressStyles.titleText}>Achieved</Text>
       <FlatList
         data={ achievedArray }
         keyExtractor={(item) => item.toString()}
@@ -188,10 +176,11 @@ function OurAchievedList(){
         )}
         numColumns={1}
         ></FlatList>
+        </>
     );
-  } catch {
+    } catch {
     return (
-      <Text style={ProgressStyles.yesOrNoText}>The Achieved list cannot be loaded right now</Text>
+      <Text style={ProgressStyles.yesOrNoText}>The list cannot be loaded right now</Text>
     );
   }
 }
@@ -210,8 +199,6 @@ export default class ProgressScreen extends Component {
         <Text style={ProgressStyles.banner}>You have { lenToDoList } tasks in your to-do list!</Text>
         <Text style={ProgressStyles.titleText}>To Do</Text>
         <OurToDoList/>
-        <Text style={ProgressStyles.titleText}>Achieved</Text>
-        <OurAchievedList/>
         </SafeAreaView>
     );}
 }

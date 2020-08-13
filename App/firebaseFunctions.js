@@ -27,7 +27,7 @@ export function addTask(userFirebaseId, activityId, activityName, activityDesc) 
 	      console.log("ERR: Unable to store in database");
 	      // Do something here so that app continues to function
       } else {
-	  console.log("SUCCESS: Appended to activity to-do list in Busy Beagle database");
+	  console.log("SUCCESS: Appended ", activityName, " to to-do list in Busy Beagle database");
 	  }}
 	);
 	} else {
@@ -85,7 +85,7 @@ export function achieveTask(userFirebaseId, activityId, activityName, activityDe
 	  if (error) {
 	      console.log("ERR: Unable to store in database");
       } else {
-	  console.log("SUCCESS: Appended to achivement list in Busy Beagle database");
+	  console.log("SUCCESS: Appended ", activityName, " to achivement list in Busy Beagle database");
 	  }}
 	);
 
