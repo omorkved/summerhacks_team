@@ -111,18 +111,16 @@ class AuthScreen extends React.Component {
         onPress={() => this.signInWithEmail()}>
         <Text>Sign In</Text>
       </TouchableOpacity>
-
-      <View style={{ marginTop: 10 }}>
-              <Text
-      style={{ fontWeight: "200", fontSize: 17, textAlign: "center" }}
+          </KeyboardAvoidingView>
+          <View style={{ marginTop: 10 }}>
+          <Text
+        style={{ fontWeight: "200", fontSize: 17, textAlign: "center", marginBottom: 10 }}
       onPress={() => {
 	      this.props.navigation.navigate("SignUp");
 	  }}
               >
                 Don't have an Account? Click Here
               </Text>
-            </View>
-          </KeyboardAvoidingView>
           <Image
           source={require("../assets/mainImage.png")}
           style={{
@@ -130,9 +128,10 @@ class AuthScreen extends React.Component {
             height: Dimensions.get("screen").height / 3,
             alignSelf: "center",
             marginTop: 0,
-            marginBottom: 40,
+            marginBottom: 10,
           }}
         />
+        </View>
         </SafeAreaView>
       </TouchableWithoutFeedback>
     );
