@@ -33,6 +33,10 @@ export function addTask(userFirebaseId, activityId, activityName, activityDesc) 
 	} else {
 		console.log("ERR: Authenticaton did not work. userFirebaseId is null");
 	}
+
+  fdb.ref(userFirebaseId + '/todos').once('value').then(function(snapshot){
+                if (snapshot.val()) global.activityArray = Object.entries(snapshot.val())
+					});
   console.log("Firebase function addTask ran for user: ", userFirebaseId);
   return
 };

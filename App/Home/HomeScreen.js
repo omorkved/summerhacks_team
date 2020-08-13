@@ -30,7 +30,7 @@ fauth.onAuthStateChanged((user) => {
   try {
     fdb.ref(user.uid + '/todos').once('value').then(function(snapshot){
       console.log("... fetching saved activity data.");
-      global.activityArray = Object.entries(snapshot.val())
+      if (snapshot.val()) global.activityArray = Object.entries(snapshot.val())
     });
   } catch (err) {
     /* If activityArray is unable to be set above, it will be set in ProgressScreen once user has added some activities.
@@ -40,7 +40,7 @@ fauth.onAuthStateChanged((user) => {
   try {
     fdb.ref(user.uid + '/achieved').once('value').then(function(snapshot){
       console.log("... fetching saved achievement data.");
-      global.achievedArray = Object.entries(snapshot.val())
+      if (snapshot.val()) global.achievedArray = Object.entries(snapshot.val())
     });
   } catch (err) {
     console.log("...Unable to read achievement data.", err);

@@ -70,7 +70,7 @@ function OurToDoList(){
       <View style={{ height: Dimensions.get("screen").height / 3 }}>
       <FlatList
         data={ activityArray }
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.toString()}
         renderItem={({ item }) => (
             <TouchableOpacity
               style={{
