@@ -1,17 +1,18 @@
 {
   "expo": {
-    "name": "App",
-    "slug": "App",
+    "name": "Busy Beagles App",
+    "slug": "busy-beagles-app-for-kids",
+    "description": "We created an activities app targeted at kids ages 5-12. We call it Busy Beagles! It’s inspired by the fact that in quarantine, kids are the ones with the most unspent energy as they are stuck at home with little to do. We wanted to develop an app that provides them with activities to do during quarantine and even after in order to get them active and focused. Authors: Tess Van Daele, Olivia Morkved, Derex Wangmang, Jorge Tomaylla",
+
     "platforms": [
       "ios",
-      "android",
       "web"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/mainImageSquare.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/mainImage.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
