@@ -97,9 +97,10 @@ const styles = StyleSheet.create({
     width: Dimensions.get("screen").width,
     height: Dimensions.get("screen").height / 2,
     alignItems: "center",
+    margin: 10,
   },
   smallButton: {
-    height: Dimensions.get("screen").height / 8,
+    height: Dimensions.get("screen").height / 10,
     width: Dimensions.get("screen").width / 1.2,
     alignSelf: "center",
     marginTop: Dimensions.get("screen").height / 10,

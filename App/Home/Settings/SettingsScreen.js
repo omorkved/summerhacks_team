@@ -179,26 +179,6 @@ export default class SettingsScreen extends Component {
         <Text style={settingsStyles.text}>Choose Your Favorite Color:</Text>
         <View>{this.renderColors()}</View>
 
-        <TouchableOpacity>
-          <Text
-            style={{
-              height: Dimensions.get("screen").height / 18,
-              width: Dimensions.get("screen").width / 1.1,
-              backgroundColor: this.state.color,
-              borderRadius: 12,
-              color: "white",
-              fontFamily: font,
-              fontSize: 24,
-              overflow: "hidden",
-              margin: 5,
-              padding: 5,
-            }}
-            onPress={this.myColorAlert}
-          >
-            {this.state.buttonTwo}
-          </Text>
-        </TouchableOpacity>
-
         {/* <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={this.isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -269,12 +249,13 @@ const settingsStyles = StyleSheet.create({
   profileImage: {
     width: 200,
     height: 200,
-    borderRadius: 100,
-    overflow: "hidden",
+    //borderRadius: 100,
+    //overflow: "hidden",
   },
   image: {
     flex: 1,
-    height: undefined,
-    width: undefined,
+    alignSelf: "center",
+    height: Dimensions.get("screen").height / 5,
+    width: Dimensions.get("screen").width / 1.5,
   },
 });
