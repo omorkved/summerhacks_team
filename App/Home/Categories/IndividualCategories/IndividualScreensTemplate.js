@@ -17,7 +17,7 @@ import {
 
 import * as fullData from "./Activities.json";
 import ActivityCell from "./ActivityCell";
-import { addTask, userId, removeTask } from "../../../firebaseFunctions";
+import { addTask, removeTask } from "../../../firebaseFunctions";
 
 function loggingType(someVar) {
   console.log(typeof someVar);
@@ -37,8 +37,7 @@ export default class Practice extends Component {
     this.activityType = props.route.params.activityType;
     this.categoryColor;
 
-    /* This tells the screen which data to populate with
-       TO DO: update this to include all possible options */
+    /* This tells the screen which data to use to populate the screen */
     if (this.activityType == "indoors") {
       this.dataFromJSON = fullData.indoors;
       this.categoryColor = "dodgerblue";
@@ -56,14 +55,11 @@ export default class Practice extends Component {
       this.categoryColor = "sandybrown";
     }
   }
-  // TO DO: Activities that the user has already added should not show up, right?
-  /* TO DO: Right now, "Yes" adds to a to-do list. We should then navigate to a second set
-            of choices that says "do now" or "do later", yeah? */
+  // Future work: Activities that the user has already added should not show up
   render(props) {
     return (
       <SafeAreaView style={practiceStyles.container}>
         <FlatList
-          //data={fullData.indoors}
           data={this.dataFromJSON}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -82,8 +78,6 @@ export default class Practice extends Component {
               // Only one activity will be selected at a time, so set its metadata as this values
               onPress={() => {
                 this.setState({ show: true });
-                // TO DO: Let's change this to not use this vars at some pt -- to avoid
-                //        accidental conflicts between variable names
                 this.itemName = item.identifier;
                 this.itemDescription = item.description;
                 this.itemId = item.id;
@@ -137,7 +131,7 @@ export default class Practice extends Component {
                   /* Sends Task to Firebase to record selection
                       But first checks if an activity with valid Id has been selected */
                   if (typeof this.itemId !== "undefined") {
-                    addTask(userId, this.itemId);
+                    addTask(userFirebaseId, this.itemId, this.itemName, this.itemDescription);
                   } else {
                     //this line below is just for debugging
                     console.log(this.dataFromJSON);
@@ -168,7 +162,7 @@ export default class Practice extends Component {
 
                   // "No" option: they reject the activity.
                   if (typeof this.itemId !== "undefined") {
-                    removeTask(userId, this.itemId);
+                    removeTask(userFirebaseId, this.itemId);
                   }
 
                   // TO DO: Do we want this to auto-select a new activity, instead?
