@@ -6,12 +6,17 @@ We created an activities app targeted at kids ages 5-12. It’s inspired by the 
 
 
 To run:
+
+Note to SummerHacks team: the firebase.config.js file is purposefully missing for the repo as it contains our Firebase API key. Email us at busybeaglesapp@gmail.com to get it :)
+
 install expo:
 `npm install -g expo-cli`
 
 install the directory
 
 `cd App/`
+
+Verify that the `firebase.config.js` file is contained in this directory.
 
 `expo install` This should install all dependencies, such as React Navigation
 
@@ -21,3 +26,5 @@ You can scan the QR code to test on an iOS device (this requires having the Expo
 <em>Android and web are still in development -- please test with iOS.</em>
 
 <em> ~ Work in progress. ~ </em>
+
+
